@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31829.152
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thunderstruck.UI.Android", "Thunderstruck.UI\Thunderstruck.UI.Android\Thunderstruck.UI.Android.csproj", "{9250EC6B-0540-42B0-9216-61C76251734F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thunderstruck.UI", "Thunderstruck.UI\Thunderstruck.UI\Thunderstruck.UI.csproj", "{B504BF3D-9E1B-4220-A442-8E64A5C01D25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thunderstruck.BLL", "Thunderstruck.BLL\Thunderstruck.BLL.csproj", "{1C2580FD-1A13-4997-8879-3ED58B4D9320}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thunderstruck.DAL", "Thunderstruck.DAL\Thunderstruck.DAL.csproj", "{A75754E4-EFF6-4B14-B52C-22DDDB0775AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thunderstruck.DOMAIN", "Thunderstruck.DOMAIN\Thunderstruck.DOMAIN.csproj", "{6E5601CD-F934-4AC5-9438-7597B9B845C7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9250EC6B-0540-42B0-9216-61C76251734F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9250EC6B-0540-42B0-9216-61C76251734F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9250EC6B-0540-42B0-9216-61C76251734F}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{9250EC6B-0540-42B0-9216-61C76251734F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9250EC6B-0540-42B0-9216-61C76251734F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9250EC6B-0540-42B0-9216-61C76251734F}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{B504BF3D-9E1B-4220-A442-8E64A5C01D25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B504BF3D-9E1B-4220-A442-8E64A5C01D25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B504BF3D-9E1B-4220-A442-8E64A5C01D25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B504BF3D-9E1B-4220-A442-8E64A5C01D25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C2580FD-1A13-4997-8879-3ED58B4D9320}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C2580FD-1A13-4997-8879-3ED58B4D9320}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C2580FD-1A13-4997-8879-3ED58B4D9320}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C2580FD-1A13-4997-8879-3ED58B4D9320}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A75754E4-EFF6-4B14-B52C-22DDDB0775AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A75754E4-EFF6-4B14-B52C-22DDDB0775AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A75754E4-EFF6-4B14-B52C-22DDDB0775AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A75754E4-EFF6-4B14-B52C-22DDDB0775AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E5601CD-F934-4AC5-9438-7597B9B845C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E5601CD-F934-4AC5-9438-7597B9B845C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E5601CD-F934-4AC5-9438-7597B9B845C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E5601CD-F934-4AC5-9438-7597B9B845C7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C11B6094-76D8-4ED9-9DF8-73649B8B6B25}
+	EndGlobalSection
+EndGlobal
