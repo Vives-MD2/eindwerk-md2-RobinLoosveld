@@ -5,13 +5,15 @@ VisualStudioVersion = 16.0.31829.152
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thunderstruck.UI.Android", "Thunderstruck.UI\Thunderstruck.UI.Android\Thunderstruck.UI.Android.csproj", "{9250EC6B-0540-42B0-9216-61C76251734F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thunderstruck.UI", "Thunderstruck.UI\Thunderstruck.UI\Thunderstruck.UI.csproj", "{B504BF3D-9E1B-4220-A442-8E64A5C01D25}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Thunderstruck.UI", "Thunderstruck.UI\Thunderstruck.UI\Thunderstruck.UI.csproj", "{B504BF3D-9E1B-4220-A442-8E64A5C01D25}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thunderstruck.BLL", "Thunderstruck.BLL\Thunderstruck.BLL.csproj", "{1C2580FD-1A13-4997-8879-3ED58B4D9320}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Thunderstruck.BLL", "Thunderstruck.BLL\Thunderstruck.BLL.csproj", "{1C2580FD-1A13-4997-8879-3ED58B4D9320}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thunderstruck.DAL", "Thunderstruck.DAL\Thunderstruck.DAL.csproj", "{A75754E4-EFF6-4B14-B52C-22DDDB0775AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Thunderstruck.DAL", "Thunderstruck.DAL\Thunderstruck.DAL.csproj", "{A75754E4-EFF6-4B14-B52C-22DDDB0775AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thunderstruck.DOMAIN", "Thunderstruck.DOMAIN\Thunderstruck.DOMAIN.csproj", "{6E5601CD-F934-4AC5-9438-7597B9B845C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Thunderstruck.DOMAIN", "Thunderstruck.DOMAIN\Thunderstruck.DOMAIN.csproj", "{6E5601CD-F934-4AC5-9438-7597B9B845C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thunderstruck.Mock", "Thunderstruck.Mock\Thunderstruck.Mock.csproj", "{E937CAFE-01C4-4BA7-84A6-4E3B9B20F575}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{6E5601CD-F934-4AC5-9438-7597B9B845C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E5601CD-F934-4AC5-9438-7597B9B845C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E5601CD-F934-4AC5-9438-7597B9B845C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E937CAFE-01C4-4BA7-84A6-4E3B9B20F575}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E937CAFE-01C4-4BA7-84A6-4E3B9B20F575}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E937CAFE-01C4-4BA7-84A6-4E3B9B20F575}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E937CAFE-01C4-4BA7-84A6-4E3B9B20F575}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
