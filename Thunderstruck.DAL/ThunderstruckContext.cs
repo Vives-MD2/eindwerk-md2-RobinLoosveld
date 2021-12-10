@@ -50,44 +50,6 @@ namespace Thunderstruck.DAL
                 .HasKey(u => u.Id);
             modelBuilder.Entity<LocationData>()
                 .HasKey(ld => ld.Id);
-
-            modelBuilder.Entity<Achievement>().ToTable("Achievement");
-            modelBuilder.Entity<AchievementFirstRain>().ToTable("AchievementFirstRain");
-            modelBuilder.Entity<AchievementHighVoltage>().ToTable("AchievementHighVoltage");
-            modelBuilder.Entity<AchievementListening>().ToTable("AchievementListening");
-            modelBuilder.Entity<AchievementSpeed>().ToTable("AchievementSpeed");
-
-            //modelBuilder.Entity<Achievement>()
-            //    .HasKey(x => x.Id);
-
-            //modelBuilder.Entity<AchievementFirstRain>()
-            //    .HasOne(x => x.Achievement)
-            //    .WithOne()
-            //    .HasForeignKey<AchievementFirstRain>(e => e.Id);
-            //modelBuilder.Entity<Achievement>().HasMany(typeof(AchievementID), "AchievementIds").WithOne();
-            //modelBuilder.Entity<AchievementFirstRain>();
-            //modelBuilder.Entity<Achievement>().ToTable("Achievements");
-            //modelBuilder.Entity<AchievementFirstRain>();
-            //modelBuilder.Entity<AchievementHighVoltage>();
-
-            //modelBuilder.Entity<Achievement>()
-            //    .HasKey(ld => ld.Id);
-            //modelBuilder.Entity<Achievement>().ToTable("Achievement");
-            //modelBuilder.Entity<AchievementFirstRain>()
-            //    .HasOne(e => e.Id)
-            //    .WithOne()
-            //    .HasForeignKey<AchievementFirstRain>(e => e.Id);
-            //modelBuilder.Entity<AchievementFirstRain>().ToTable("Achievement");
-
-            //modelBuilder.Entity<AchievementFirstRain>()
-            //    .HasKey(a => a.Id);
-            //modelBuilder.Entity<AchievementHighVoltage>()
-            //    .HasKey(a => a.Id);
-            //modelBuilder.Entity<AchievementListening>()
-            //    .HasKey(a => a.Id);
-            //modelBuilder.Entity<AchievementSpeed>()
-            //    .HasKey(a => a.Id);
-
             #endregion
 
             #region USER
@@ -98,13 +60,28 @@ namespace Thunderstruck.DAL
                 .Property(u => u.LastName)
                 .HasMaxLength(50);
             #endregion
-            #region UNIQUE KEYS USER
+
+            #region USER UNIQUE KEYS
             modelBuilder.Entity<User>()
                 .HasIndex(u => u.Email)
                 .IsUnique();
             modelBuilder.Entity<User>()
                 .HasIndex(u => u.Username)
                 .IsUnique();
+            #endregion
+            
+            #region LOCATIONDATA
+            modelBuilder.Entity<LocationData>()
+                .Property(l =>l.LocationName)
+                .HasMaxLength(50);
+            modelBuilder.Entity<LocationData>()
+                .Property(l => l.TimeStamp)
+                .HasColumnType("datetime")
+                .IsRequired();
+            modelBuilder.Entity<LocationData>()
+                .Property(l => l.Location)
+                .IsRequired()
+                .HasColumnType("geography");
             #endregion
 
             #region ACHIEVEMENT
@@ -122,20 +99,6 @@ namespace Thunderstruck.DAL
             modelBuilder.Entity<Achievement>()
                 .Property(u => u.IconImageLink)
                 .HasMaxLength(255);
-            #endregion
-
-            #region LOCATIONDATA
-            modelBuilder.Entity<LocationData>()
-                .Property(l =>l.LocationName)
-                .HasMaxLength(50);
-            modelBuilder.Entity<LocationData>()
-                .Property(l => l.TimeStamp)
-                .HasColumnType("datetime")
-                .IsRequired();
-            modelBuilder.Entity<LocationData>()
-                .Property(l => l.Location)
-                .IsRequired()
-                .HasColumnType("geography");
             #endregion
 
             #region ACHIEVEMENTFIRSTRAIN
@@ -165,31 +128,16 @@ namespace Thunderstruck.DAL
                 .IsRequired();
             #endregion
 
-            #region ONE TO ONE
+            #region ONE TO ONE INHERITANCE
 
-            ////AchievementFirstRain
-            //modelBuilder.Entity<Achievement>()
-            //    .HasOne<AchievementFirstRain>(a => a.AchievementFirstRain)
-            //    .WithOne(ad => ad.Achievement)
-            //    .HasForeignKey<AchievementFirstRain>(a => a.AchievementId);
+            // source: https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/inheritance?view=aspnetcore-5.0
+            // wasn't necessary to replace the Up method
 
-            ////AchievementHightVoltage
-            //modelBuilder.Entity<Achievement>()
-            //    .HasOne<AchievementHighVoltage>(a => a.AchievementHighVoltage)
-            //    .WithOne(ad => ad.Achievement)
-            //    .HasForeignKey<AchievementHighVoltage>(a => a.AchievementId);
-
-            ////AchievementListening
-            //modelBuilder.Entity<Achievement>()
-            //    .HasOne<AchievementListening>(a => a.AchievementListening)
-            //    .WithOne(ad => ad.Achievement)
-            //    .HasForeignKey<AchievementListening>(a => a.AchievementId);
-
-            ////AchievementSpeed
-            //modelBuilder.Entity<Achievement>()
-            //    .HasOne<AchievementSpeed>(a => a.AchievementSpeed)
-            //    .WithOne(ad => ad.Achievement)
-            //    .HasForeignKey<AchievementSpeed>(a => a.AchievementId);
+            modelBuilder.Entity<Achievement>().ToTable("Achievement");
+            modelBuilder.Entity<AchievementFirstRain>().ToTable("AchievementFirstRain");
+            modelBuilder.Entity<AchievementHighVoltage>().ToTable("AchievementHighVoltage");
+            modelBuilder.Entity<AchievementListening>().ToTable("AchievementListening");
+            modelBuilder.Entity<AchievementSpeed>().ToTable("AchievementSpeed");
 
             #endregion
 
