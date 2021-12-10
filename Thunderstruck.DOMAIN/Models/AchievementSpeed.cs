@@ -2,11 +2,8 @@
 
 namespace Thunderstruck.DOMAIN.Models
 {
-    public class AchievementSpeed : GObject
+    public class AchievementSpeed : Achievement
     {
-        public int Id { get; set; }
-        public int AchievementId { get; set; }
-        public Achievement Achievement { get; set; }
         public double Speed { get; set; }
     }
 }

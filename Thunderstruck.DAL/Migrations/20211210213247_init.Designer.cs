@@ -11,15 +11,15 @@ using Thunderstruck.DAL;
 namespace Thunderstruck.DAL.Migrations
 {
     [DbContext(typeof(ThunderstruckContext))]
-    [Migration("20211207082433_fixpoint")]
-    partial class fixpoint
+    [Migration("20211210213247_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.21")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Thunderstruck.DOMAIN.Models.Achievement", b =>
@@ -31,108 +31,24 @@ namespace Thunderstruck.DAL.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(255)")
-                        .HasMaxLength(255);
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("IconImageLink")
-                        .HasColumnType("nvarchar(255)")
-                        .HasMaxLength(255);
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("Reward")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Achievements");
-                });
-
-            modelBuilder.Entity("Thunderstruck.DOMAIN.Models.AchievementFirstRain", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AchievementId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsRaining")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AchievementId")
-                        .IsUnique();
-
-                    b.ToTable("AchievementFirstRains");
-                });
-
-            modelBuilder.Entity("Thunderstruck.DOMAIN.Models.AchievementHighVoltage", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AchievementId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsThunderstorm")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AchievementId")
-                        .IsUnique();
-
-                    b.ToTable("AchievementHighVoltages");
-                });
-
-            modelBuilder.Entity("Thunderstruck.DOMAIN.Models.AchievementListening", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AchievementId")
-                        .HasColumnType("int");
-
-                    b.Property<double>("TotalPlayTime")
-                        .HasColumnType("float");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AchievementId")
-                        .IsUnique();
-
-                    b.ToTable("AchievementListenings");
-                });
-
-            modelBuilder.Entity("Thunderstruck.DOMAIN.Models.AchievementSpeed", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AchievementId")
-                        .HasColumnType("int");
-
-                    b.Property<double>("Speed")
-                        .HasColumnType("float");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AchievementId")
-                        .IsUnique();
-
-                    b.ToTable("AchievementsSpeeds");
+                    b.ToTable("Achievement");
                 });
 
             modelBuilder.Entity("Thunderstruck.DOMAIN.Models.LocationData", b =>
@@ -147,15 +63,15 @@ namespace Thunderstruck.DAL.Migrations
                         .HasColumnType("geography");
 
                     b.Property<string>("LocationName")
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime>("TimeStamp")
                         .HasColumnType("datetime");
 
                     b.HasKey("Id");
 
-                    b.ToTable("LocationsData");
+                    b.ToTable("LocationData");
                 });
 
             modelBuilder.Entity("Thunderstruck.DOMAIN.Models.User", b =>
@@ -169,12 +85,12 @@ namespace Thunderstruck.DAL.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Username")
                         .HasColumnType("nvarchar(450)");
@@ -189,7 +105,7 @@ namespace Thunderstruck.DAL.Migrations
                         .IsUnique()
                         .HasFilter("[Username] IS NOT NULL");
 
-                    b.ToTable("Users");
+                    b.ToTable("User");
                 });
 
             modelBuilder.Entity("Thunderstruck.DOMAIN.Models.UserAchievement", b =>
@@ -207,7 +123,7 @@ namespace Thunderstruck.DAL.Migrations
 
                     b.HasIndex("AchievementId");
 
-                    b.ToTable("UserAchievements");
+                    b.ToTable("UserAchievement");
                 });
 
             modelBuilder.Entity("Thunderstruck.DOMAIN.Models.UserLocationData", b =>
@@ -222,43 +138,47 @@ namespace Thunderstruck.DAL.Migrations
 
                     b.HasIndex("LocationDataId");
 
-                    b.ToTable("UsersLocationsData");
+                    b.ToTable("UsersLocationData");
                 });
 
             modelBuilder.Entity("Thunderstruck.DOMAIN.Models.AchievementFirstRain", b =>
                 {
-                    b.HasOne("Thunderstruck.DOMAIN.Models.Achievement", "Achievement")
-                        .WithOne("AchievementFirstRain")
-                        .HasForeignKey("Thunderstruck.DOMAIN.Models.AchievementFirstRain", "AchievementId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasBaseType("Thunderstruck.DOMAIN.Models.Achievement");
+
+                    b.Property<bool>("IsRaining")
+                        .HasColumnType("bit");
+
+                    b.ToTable("AchievementFirstRain");
                 });
 
             modelBuilder.Entity("Thunderstruck.DOMAIN.Models.AchievementHighVoltage", b =>
                 {
-                    b.HasOne("Thunderstruck.DOMAIN.Models.Achievement", "Achievement")
-                        .WithOne("AchievementHighVoltage")
-                        .HasForeignKey("Thunderstruck.DOMAIN.Models.AchievementHighVoltage", "AchievementId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasBaseType("Thunderstruck.DOMAIN.Models.Achievement");
+
+                    b.Property<bool>("IsThunderstorm")
+                        .HasColumnType("bit");
+
+                    b.ToTable("AchievementHighVoltage");
                 });
 
             modelBuilder.Entity("Thunderstruck.DOMAIN.Models.AchievementListening", b =>
                 {
-                    b.HasOne("Thunderstruck.DOMAIN.Models.Achievement", "Achievement")
-                        .WithOne("AchievementListening")
-                        .HasForeignKey("Thunderstruck.DOMAIN.Models.AchievementListening", "AchievementId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasBaseType("Thunderstruck.DOMAIN.Models.Achievement");
+
+                    b.Property<DateTime>("TotalPlayTime")
+                        .HasColumnType("datetime2");
+
+                    b.ToTable("AchievementListening");
                 });
 
             modelBuilder.Entity("Thunderstruck.DOMAIN.Models.AchievementSpeed", b =>
                 {
-                    b.HasOne("Thunderstruck.DOMAIN.Models.Achievement", "Achievement")
-                        .WithOne("AchievementSpeed")
-                        .HasForeignKey("Thunderstruck.DOMAIN.Models.AchievementSpeed", "AchievementId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasBaseType("Thunderstruck.DOMAIN.Models.Achievement");
+
+                    b.Property<double>("Speed")
+                        .HasColumnType("float");
+
+                    b.ToTable("AchievementSpeed");
                 });
 
             modelBuilder.Entity("Thunderstruck.DOMAIN.Models.UserAchievement", b =>
@@ -274,6 +194,10 @@ namespace Thunderstruck.DAL.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Achievement");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Thunderstruck.DOMAIN.Models.UserLocationData", b =>
@@ -289,6 +213,63 @@ namespace Thunderstruck.DAL.Migrations
                         .HasForeignKey("LocationDataId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("LocationData");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Thunderstruck.DOMAIN.Models.AchievementFirstRain", b =>
+                {
+                    b.HasOne("Thunderstruck.DOMAIN.Models.Achievement", null)
+                        .WithOne()
+                        .HasForeignKey("Thunderstruck.DOMAIN.Models.AchievementFirstRain", "Id")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Thunderstruck.DOMAIN.Models.AchievementHighVoltage", b =>
+                {
+                    b.HasOne("Thunderstruck.DOMAIN.Models.Achievement", null)
+                        .WithOne()
+                        .HasForeignKey("Thunderstruck.DOMAIN.Models.AchievementHighVoltage", "Id")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Thunderstruck.DOMAIN.Models.AchievementListening", b =>
+                {
+                    b.HasOne("Thunderstruck.DOMAIN.Models.Achievement", null)
+                        .WithOne()
+                        .HasForeignKey("Thunderstruck.DOMAIN.Models.AchievementListening", "Id")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Thunderstruck.DOMAIN.Models.AchievementSpeed", b =>
+                {
+                    b.HasOne("Thunderstruck.DOMAIN.Models.Achievement", null)
+                        .WithOne()
+                        .HasForeignKey("Thunderstruck.DOMAIN.Models.AchievementSpeed", "Id")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Thunderstruck.DOMAIN.Models.Achievement", b =>
+                {
+                    b.Navigation("UserAchievements");
+                });
+
+            modelBuilder.Entity("Thunderstruck.DOMAIN.Models.LocationData", b =>
+                {
+                    b.Navigation("UserLocationsData");
+                });
+
+            modelBuilder.Entity("Thunderstruck.DOMAIN.Models.User", b =>
+                {
+                    b.Navigation("UserAchievements");
+
+                    b.Navigation("UserLocationsData");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,12 +1,12 @@
-﻿using Thunderstruck.DOMAIN.Helpers;
+﻿using System.Collections.Generic;
+using Thunderstruck.DOMAIN.Helpers;
 
 namespace Thunderstruck.DOMAIN.Models
 {
-    public class AchievementFirstRain:GObject
+
+    public class AchievementFirstRain : Achievement
     {
-        public int Id { get; set; }
-        public int AchievementId { get; set; }
-        public Achievement Achievement { get; set; }
+        //public Achievement Achievement { get; set; }
         public bool IsRaining { get; set; }
     }
 }

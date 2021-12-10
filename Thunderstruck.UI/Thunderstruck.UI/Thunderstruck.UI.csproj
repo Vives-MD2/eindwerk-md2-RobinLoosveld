@@ -16,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Thunderstruck.DAL\Thunderstruck.DAL.csproj" />
     <ProjectReference Include="..\..\Thunderstruck.DOMAIN\Thunderstruck.DOMAIN.csproj" />
   </ItemGroup>
 </Project>

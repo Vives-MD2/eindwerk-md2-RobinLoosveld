@@ -22,17 +22,17 @@ namespace Thunderstruck.DAL
         }
         #region DbSets
         //
-        public DbSet<User> Users { get; set; }
-        public DbSet<Achievement> Achievements { get; set; }
-        public DbSet<LocationData> LocationsData { get; set; }
+        public DbSet<User> User { get; set; }
+        public DbSet<Achievement> Achievement { get; set; }
+        public DbSet<LocationData> LocationData { get; set; }
         //
-        public DbSet<UserAchievement> UserAchievements { get; set; }
-        public DbSet<UserLocationData> UsersLocationsData { get; set; }
+        public DbSet<UserAchievement> UserAchievement { get; set; }
+        public DbSet<UserLocationData> UsersLocationData { get; set; }
         //
-        public DbSet<AchievementFirstRain> AchievementFirstRains { get; set; }
-        public DbSet<AchievementHighVoltage> AchievementHighVoltages { get; set; }
-        public DbSet<AchievementListening> AchievementListenings { get; set; }
-        public DbSet<AchievementSpeed> AchievementsSpeeds { get; set; }
+        public DbSet<AchievementFirstRain> AchievementFirstRain { get; set; }
+        public DbSet<AchievementHighVoltage> AchievementHighVoltage { get; set; }
+        public DbSet<AchievementListening> AchievementListening { get; set; }
+        public DbSet<AchievementSpeed> AchievementSpeed { get; set; }
 
         #endregion
 
@@ -48,19 +48,45 @@ namespace Thunderstruck.DAL
 
             modelBuilder.Entity<User>()
                 .HasKey(u => u.Id);
-            modelBuilder.Entity<Achievement>()
-                .HasKey(a => a.Id);
             modelBuilder.Entity<LocationData>()
                 .HasKey(ld => ld.Id);
 
-            modelBuilder.Entity<AchievementFirstRain>()
-                .HasKey(a => a.Id);
-            modelBuilder.Entity<AchievementHighVoltage>()
-                .HasKey(a => a.Id);
-            modelBuilder.Entity<AchievementListening>()
-                .HasKey(a => a.Id);
-            modelBuilder.Entity<AchievementSpeed>()
-                .HasKey(a => a.Id);
+            modelBuilder.Entity<Achievement>().ToTable("Achievement");
+            modelBuilder.Entity<AchievementFirstRain>().ToTable("AchievementFirstRain");
+            modelBuilder.Entity<AchievementHighVoltage>().ToTable("AchievementHighVoltage");
+            modelBuilder.Entity<AchievementListening>().ToTable("AchievementListening");
+            modelBuilder.Entity<AchievementSpeed>().ToTable("AchievementSpeed");
+
+            //modelBuilder.Entity<Achievement>()
+            //    .HasKey(x => x.Id);
+
+            //modelBuilder.Entity<AchievementFirstRain>()
+            //    .HasOne(x => x.Achievement)
+            //    .WithOne()
+            //    .HasForeignKey<AchievementFirstRain>(e => e.Id);
+            //modelBuilder.Entity<Achievement>().HasMany(typeof(AchievementID), "AchievementIds").WithOne();
+            //modelBuilder.Entity<AchievementFirstRain>();
+            //modelBuilder.Entity<Achievement>().ToTable("Achievements");
+            //modelBuilder.Entity<AchievementFirstRain>();
+            //modelBuilder.Entity<AchievementHighVoltage>();
+
+            //modelBuilder.Entity<Achievement>()
+            //    .HasKey(ld => ld.Id);
+            //modelBuilder.Entity<Achievement>().ToTable("Achievement");
+            //modelBuilder.Entity<AchievementFirstRain>()
+            //    .HasOne(e => e.Id)
+            //    .WithOne()
+            //    .HasForeignKey<AchievementFirstRain>(e => e.Id);
+            //modelBuilder.Entity<AchievementFirstRain>().ToTable("Achievement");
+
+            //modelBuilder.Entity<AchievementFirstRain>()
+            //    .HasKey(a => a.Id);
+            //modelBuilder.Entity<AchievementHighVoltage>()
+            //    .HasKey(a => a.Id);
+            //modelBuilder.Entity<AchievementListening>()
+            //    .HasKey(a => a.Id);
+            //modelBuilder.Entity<AchievementSpeed>()
+            //    .HasKey(a => a.Id);
 
             #endregion
 
@@ -140,29 +166,30 @@ namespace Thunderstruck.DAL
             #endregion
 
             #region ONE TO ONE
-            //AchievementFirstRain
-            modelBuilder.Entity<Achievement>()
-                .HasOne<AchievementFirstRain>(a => a.AchievementFirstRain)
-                .WithOne(ad => ad.Achievement)
-                .HasForeignKey<AchievementFirstRain>(a => a.AchievementId);
 
-            //AchievementHightVoltage
-            modelBuilder.Entity<Achievement>()
-                .HasOne<AchievementHighVoltage>(a => a.AchievementHighVoltage)
-                .WithOne(ad => ad.Achievement)
-                .HasForeignKey<AchievementHighVoltage>(a => a.AchievementId);
+            ////AchievementFirstRain
+            //modelBuilder.Entity<Achievement>()
+            //    .HasOne<AchievementFirstRain>(a => a.AchievementFirstRain)
+            //    .WithOne(ad => ad.Achievement)
+            //    .HasForeignKey<AchievementFirstRain>(a => a.AchievementId);
 
-            //AchievementListening
-            modelBuilder.Entity<Achievement>()
-                .HasOne<AchievementListening>(a => a.AchievementListening)
-                .WithOne(ad => ad.Achievement)
-                .HasForeignKey<AchievementListening>(a => a.AchievementId);
+            ////AchievementHightVoltage
+            //modelBuilder.Entity<Achievement>()
+            //    .HasOne<AchievementHighVoltage>(a => a.AchievementHighVoltage)
+            //    .WithOne(ad => ad.Achievement)
+            //    .HasForeignKey<AchievementHighVoltage>(a => a.AchievementId);
 
-            //AchievementSpeed
-            modelBuilder.Entity<Achievement>()
-                .HasOne<AchievementSpeed>(a => a.AchievementSpeed)
-                .WithOne(ad => ad.Achievement)
-                .HasForeignKey<AchievementSpeed>(a => a.AchievementId);
+            ////AchievementListening
+            //modelBuilder.Entity<Achievement>()
+            //    .HasOne<AchievementListening>(a => a.AchievementListening)
+            //    .WithOne(ad => ad.Achievement)
+            //    .HasForeignKey<AchievementListening>(a => a.AchievementId);
+
+            ////AchievementSpeed
+            //modelBuilder.Entity<Achievement>()
+            //    .HasOne<AchievementSpeed>(a => a.AchievementSpeed)
+            //    .WithOne(ad => ad.Achievement)
+            //    .HasForeignKey<AchievementSpeed>(a => a.AchievementId);
 
             #endregion
 
