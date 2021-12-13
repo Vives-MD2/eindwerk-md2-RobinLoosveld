@@ -8,4 +8,8 @@
     <Folder Include="Contracts\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Thunderstruck.DAL\Thunderstruck.DAL.csproj" />
+  </ItemGroup>
+
 </Project>

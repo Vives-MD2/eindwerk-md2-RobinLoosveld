@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Thunderstruck.DAL", "Thunde
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Thunderstruck.DOMAIN", "Thunderstruck.DOMAIN\Thunderstruck.DOMAIN.csproj", "{6E5601CD-F934-4AC5-9438-7597B9B845C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thunderstruck.Mock", "Thunderstruck.Mock\Thunderstruck.Mock.csproj", "{E937CAFE-01C4-4BA7-84A6-4E3B9B20F575}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Thunderstruck.Mock", "Thunderstruck.Mock\Thunderstruck.Mock.csproj", "{E937CAFE-01C4-4BA7-84A6-4E3B9B20F575}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thunderstruck.RestApi", "Thunderstruck.RestApi\Thunderstruck.RestApi.csproj", "{6711C94B-3281-4E83-AAEE-CB07C144E994}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,10 @@ Global
 		{E937CAFE-01C4-4BA7-84A6-4E3B9B20F575}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E937CAFE-01C4-4BA7-84A6-4E3B9B20F575}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E937CAFE-01C4-4BA7-84A6-4E3B9B20F575}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6711C94B-3281-4E83-AAEE-CB07C144E994}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6711C94B-3281-4E83-AAEE-CB07C144E994}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6711C94B-3281-4E83-AAEE-CB07C144E994}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6711C94B-3281-4E83-AAEE-CB07C144E994}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
