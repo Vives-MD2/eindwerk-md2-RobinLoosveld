@@ -33,7 +33,7 @@ namespace Thunderstruck.DAL.DBs
 
         public async Task<User> CreateAsync(User entity)
         {
-            _context.Add(entity);
+            _context.User.Add(entity);
             await _context.SaveChangesAsync();
             return entity;
         }

@@ -1,35 +1,52 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Thunderstruck.DOMAIN.Contracts;
+using Thunderstruck.DOMAIN.Models;
 
 namespace Thunderstruck.DAL.DBs
 {
     public class AchievementDb:IAchievement
     {
         private readonly ThunderstruckContext _context = new ThunderstruckContext();
-        public Task<IAchievement> GetByIdAsync(int id)
+        public async Task<Achievement> GetByIdAsync(int id)
         {
-            throw new System.NotImplementedException();
+            return await _context.Achievement.AsNoTracking()
+                .Include(x => x.UserAchievements)
+                .SingleOrDefaultAsync(x => x.Id == id);
         }
 
-        public Task<IEnumerable<IAchievement>> GetAsync(int skip, int take)
+        public async Task<IEnumerable<Achievement>> GetAsync(int skip, int take)
         {
-            throw new System.NotImplementedException();
+            return await _context.Achievement.AsNoTracking()
+                .OrderBy(x => x.Id)
+                .Skip(skip).Take(take)
+                .ToListAsync();
         }
 
-        public Task<IAchievement> CreateAsync(IAchievement entity)
+        public async Task<Achievement> CreateAsync(Achievement entity)
         {
-            throw new System.NotImplementedException();
+            _context.Achievement.Add(entity);
+            await _context.SaveChangesAsync();
+            return entity;
         }
 
-        public Task<IAchievement> UpdateAsync(IAchievement entity)
+        public async Task<Achievement> UpdateAsync(Achievement entity)
         {
-            throw new System.NotImplementedException();
+            _context.Achievement.Attach(entity);
+            _context.Entry<Achievement>(entity).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return entity;
         }
 
-        public Task<IAchievement> DeleteAsync(IAchievement entity)
+        public async Task<Achievement> DeleteAsync(Achievement entity)
         {
-            throw new System.NotImplementedException();
+            _context.Achievement.Remove(
+                _context.Achievement.Single(x => x.Id == entity.Id));
+            await _context.SaveChangesAsync();
+            return entity;
         }
     }
 }

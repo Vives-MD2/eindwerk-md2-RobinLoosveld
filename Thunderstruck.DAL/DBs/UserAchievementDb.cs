@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Thunderstruck.DOMAIN.Contracts;
 using Thunderstruck.DOMAIN.Models;
 
@@ -8,34 +10,47 @@ namespace Thunderstruck.DAL.DBs
     public class UserAchievementDb:IUserAchievement
     {
         private readonly ThunderstruckContext _context = new ThunderstruckContext();
-        public Task<UserAchievement> GetByIdAsync(int id)
+        public async Task<UserAchievement> GetByIdAsync(int id)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<IEnumerable<UserAchievement>> GetAsync(int skip, int take)
+        public async Task<IEnumerable<UserAchievement>> GetAsync(int skip, int take)
         {
-            throw new System.NotImplementedException();
+            return await _context.UserAchievement.AsNoTracking()
+                .OrderBy(x => x.Id)
+                .Skip(skip).Take(take)
+                .ToListAsync();
         }
 
-        public Task<UserAchievement> CreateAsync(UserAchievement entity)
+        public async Task<UserAchievement> CreateAsync(UserAchievement entity)
         {
-            throw new System.NotImplementedException();
+            _context.UserAchievement.Add(entity);
+            await _context.SaveChangesAsync();
+            return entity;
         }
 
-        public Task<UserAchievement> UpdateAsync(UserAchievement entity)
+        public async Task<UserAchievement> UpdateAsync(UserAchievement entity)
         {
-            throw new System.NotImplementedException();
+            _context.UserAchievement.Attach(entity);
+            _context.Entry<UserAchievement>(entity).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return entity;
         }
 
-        public Task<UserAchievement> DeleteAsync(UserAchievement entity)
+        public async Task<UserAchievement> DeleteAsync(UserAchievement entity)
         {
-            throw new System.NotImplementedException();
+            _context.UserAchievement.Remove(
+                _context.UserAchievement.Single(x => x.Id == entity.Id));
+            await _context.SaveChangesAsync();
+            return entity;
         }
 
-        public Task<UserAchievement> GetByIdAsync(int userId, int achievementId)
-        {
-            throw new System.NotImplementedException();
+        public async Task<UserAchievement> GetByIdAsync(int userId, int achievementId)
+        { 
+            return await _context.UserAchievement.AsNoTracking()
+                .SingleOrDefaultAsync(x => x.UserId == userId && x.AchievementId == achievementId);
         }
     }
 }

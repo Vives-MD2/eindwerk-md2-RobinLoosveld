@@ -131,7 +131,9 @@ namespace Thunderstruck.DAL
             #region ONE TO ONE INHERITANCE
 
             // source: https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/inheritance?view=aspnetcore-5.0
-            // wasn't necessary to replace the Up method
+            // -> upgrade EF core to 5 or up, this doesn't work with EF core 3
+            // -> ignore .net cli command, use package manager console "add-migration inheritance"
+            // -> you don't need to replace the "Up" method in the migration file 
 
             modelBuilder.Entity<Achievement>().ToTable("Achievement");
             modelBuilder.Entity<AchievementFirstRain>().ToTable("AchievementFirstRain");

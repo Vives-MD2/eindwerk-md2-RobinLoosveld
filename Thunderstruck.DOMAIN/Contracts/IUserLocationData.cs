@@ -3,8 +3,8 @@ using Thunderstruck.DOMAIN.Models;
 
 namespace Thunderstruck.DOMAIN.Contracts
 {
-    public interface IUserLocationData:IBase<LocationData>
+    public interface IUserLocationData:IBase<UserLocationData>
     {
-        Task<UserAchievement> GetByIdAsync(int userId, int locationDataId);
+        Task<UserLocationData> GetByIdAsync(int userId, int locationDataId);
     }
 }

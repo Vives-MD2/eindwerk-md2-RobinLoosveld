@@ -6,7 +6,6 @@ namespace Thunderstruck.DOMAIN.Models
 
     public class AchievementFirstRain : Achievement
     {
-        //public Achievement Achievement { get; set; }
         public bool IsRaining { get; set; }
     }
 }

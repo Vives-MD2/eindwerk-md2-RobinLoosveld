@@ -1,6 +1,8 @@
-﻿namespace Thunderstruck.DOMAIN.Contracts
+﻿using Thunderstruck.DOMAIN.Models;
+
+namespace Thunderstruck.DOMAIN.Contracts
 {
-    public interface IAchievement:IBase<IAchievement>
+    public interface IAchievement:IBase<Achievement>
     {
         
     }
