@@ -4,7 +4,7 @@ using Thunderstruck.DOMAIN.Helpers;
 namespace Thunderstruck.DOMAIN.Models
 {
 
-    public class AchievementFirstRain : Achievement
+    public class AchievementRain : Achievement
     {
         public bool IsRaining { get; set; }
     }

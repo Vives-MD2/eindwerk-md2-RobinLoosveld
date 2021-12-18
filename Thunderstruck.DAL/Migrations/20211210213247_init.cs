@@ -56,7 +56,7 @@ namespace Thunderstruck.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AchievementFirstRain",
+                name: "AchievementRain",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false),
@@ -204,7 +204,7 @@ namespace Thunderstruck.DAL.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AchievementFirstRain");
+                name: "AchievementRain");
 
             migrationBuilder.DropTable(
                 name: "AchievementHighVoltage");

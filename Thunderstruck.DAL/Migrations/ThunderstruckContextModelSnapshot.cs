@@ -139,16 +139,6 @@ namespace Thunderstruck.DAL.Migrations
                     b.ToTable("UsersLocationData");
                 });
 
-            modelBuilder.Entity("Thunderstruck.DOMAIN.Models.AchievementFirstRain", b =>
-                {
-                    b.HasBaseType("Thunderstruck.DOMAIN.Models.Achievement");
-
-                    b.Property<bool>("IsRaining")
-                        .HasColumnType("bit");
-
-                    b.ToTable("AchievementFirstRain");
-                });
-
             modelBuilder.Entity("Thunderstruck.DOMAIN.Models.AchievementHighVoltage", b =>
                 {
                     b.HasBaseType("Thunderstruck.DOMAIN.Models.Achievement");
@@ -167,6 +157,16 @@ namespace Thunderstruck.DAL.Migrations
                         .HasColumnType("datetime2");
 
                     b.ToTable("AchievementListening");
+                });
+
+            modelBuilder.Entity("Thunderstruck.DOMAIN.Models.AchievementRain", b =>
+                {
+                    b.HasBaseType("Thunderstruck.DOMAIN.Models.Achievement");
+
+                    b.Property<bool>("IsRaining")
+                        .HasColumnType("bit");
+
+                    b.ToTable("AchievementRain");
                 });
 
             modelBuilder.Entity("Thunderstruck.DOMAIN.Models.AchievementSpeed", b =>
@@ -217,15 +217,6 @@ namespace Thunderstruck.DAL.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Thunderstruck.DOMAIN.Models.AchievementFirstRain", b =>
-                {
-                    b.HasOne("Thunderstruck.DOMAIN.Models.Achievement", null)
-                        .WithOne()
-                        .HasForeignKey("Thunderstruck.DOMAIN.Models.AchievementFirstRain", "Id")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Thunderstruck.DOMAIN.Models.AchievementHighVoltage", b =>
                 {
                     b.HasOne("Thunderstruck.DOMAIN.Models.Achievement", null)
@@ -240,6 +231,15 @@ namespace Thunderstruck.DAL.Migrations
                     b.HasOne("Thunderstruck.DOMAIN.Models.Achievement", null)
                         .WithOne()
                         .HasForeignKey("Thunderstruck.DOMAIN.Models.AchievementListening", "Id")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Thunderstruck.DOMAIN.Models.AchievementRain", b =>
+                {
+                    b.HasOne("Thunderstruck.DOMAIN.Models.Achievement", null)
+                        .WithOne()
+                        .HasForeignKey("Thunderstruck.DOMAIN.Models.AchievementRain", "Id")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
                 });

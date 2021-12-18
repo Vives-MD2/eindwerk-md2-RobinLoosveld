@@ -29,7 +29,7 @@ namespace Thunderstruck.DAL
         public DbSet<UserAchievement> UserAchievement { get; set; }
         public DbSet<UserLocationData> UsersLocationData { get; set; }
         //
-        public DbSet<AchievementFirstRain> AchievementFirstRain { get; set; }
+        public DbSet<AchievementRain> AchievementFirstRain { get; set; }
         public DbSet<AchievementHighVoltage> AchievementHighVoltage { get; set; }
         public DbSet<AchievementListening> AchievementListening { get; set; }
         public DbSet<AchievementSpeed> AchievementSpeed { get; set; }
@@ -101,9 +101,9 @@ namespace Thunderstruck.DAL
                 .HasMaxLength(255);
             #endregion
 
-            #region ACHIEVEMENTFIRSTRAIN
+            #region ACHIEVEMENTRAIN
 
-            modelBuilder.Entity<AchievementFirstRain>()
+            modelBuilder.Entity<AchievementRain>()
                 .Property(u => u.IsRaining)
                 .IsRequired()
                 .HasColumnType("bit");
@@ -136,7 +136,7 @@ namespace Thunderstruck.DAL
             // -> you don't need to replace the "Up" method in the migration file 
 
             modelBuilder.Entity<Achievement>().ToTable("Achievement");
-            modelBuilder.Entity<AchievementFirstRain>().ToTable("AchievementFirstRain");
+            modelBuilder.Entity<AchievementRain>().ToTable("AchievementRain");
             modelBuilder.Entity<AchievementHighVoltage>().ToTable("AchievementHighVoltage");
             modelBuilder.Entity<AchievementListening>().ToTable("AchievementListening");
             modelBuilder.Entity<AchievementSpeed>().ToTable("AchievementSpeed");
