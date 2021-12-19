@@ -3,33 +3,29 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication;
 using Thunderstruck.BLL.Managers;
-using Thunderstruck.DAL.DBs;
-using Thunderstruck.DOMAIN.Helpers;
 using Thunderstruck.DOMAIN.Models;
 
 namespace Thunderstruck.RestApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class LocationDataController : ControllerBase
     {
-        private readonly UserManager _userManager = new UserManager();
+        private readonly LocationDataManager _ldManager = new LocationDataManager();
         [HttpGet("GetById")]
         public async Task<IActionResult> GetById([FromQuery(Name = "id")] int id)
         {
             try
             {
-                var dbUser = await _userManager.GetByIdAsync(id);
-                return Ok(new JsonResult(dbUser));
+                var dbLocationData = await _ldManager.GetByIdAsync(id);
+                return Ok(new JsonResult(dbLocationData));
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
-
         [HttpGet("Get")]
         public async Task<IActionResult> Get([FromQuery(Name = "skip")] int skip, [FromQuery(Name = "take")] int take)
         {
@@ -40,8 +36,8 @@ namespace Thunderstruck.RestApi.Controllers
                     take = 1;
                 }
 
-                IEnumerable<User> users = await _userManager.GetAsync(skip, take);
-                return Ok(new JsonResult(users));
+                IEnumerable<LocationData> dbLocationsData = await _ldManager.GetAsync(skip, take);
+                return Ok(new JsonResult(dbLocationsData));
             }
             catch (Exception ex)
             {
@@ -49,11 +45,11 @@ namespace Thunderstruck.RestApi.Controllers
             }
         }
         [HttpPost("Create")]
-        public async Task<IActionResult> Create([FromBody] User user)
+        public async Task<IActionResult> Create([FromBody] LocationData locationData)
         {
             try
             {
-                if (user is null)
+                if (locationData is null)
                 {
                     //return user = new User()
                     //{
@@ -61,49 +57,45 @@ namespace Thunderstruck.RestApi.Controllers
                     //};
                     throw new NullReferenceException();
                 }
-                var dbUser = await _userManager.CreateAsync(user);
-                return Ok(new JsonResult(dbUser));
+                var dbLocationData = await _ldManager.CreateAsync(locationData);
+                return Ok(new JsonResult(dbLocationData));
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
-
+        //TODO: check if update is needed in project
         [HttpPut("Update")]
-        public async Task<IActionResult> Update([FromBody] User user)
+        public async Task<IActionResult> Update([FromBody] LocationData locationData)
         {
             try
             {
-                if (user is null)
+                if (locationData is null)
                 {
-                    //return user = new User()
-                    //{
-                    //    Tex = new ThunderstruckException("No user object found.", ExceptionTypes.Fatal)
-                    //};
                     throw new NullReferenceException();
                 }
-                var dbUser = await _userManager.UpdateAsync(user);
-                return Ok(new JsonResult(dbUser));
+
+                var dbLocationData = await _ldManager.UpdateAsync(locationData);
+                return Ok(new JsonResult(dbLocationData));
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
-
+        //TODO: check if delete is needed in project
         [HttpDelete("delete")]
-        public async Task<IActionResult> Delete([FromBody] User user)
+        public async Task<IActionResult> Delete([FromBody] LocationData locationData)
         {
             try
             {
-                if (user is null)
+                if (locationData is null)
                 {
                     throw new NullReferenceException();
                 }
-
-                var dbUser = await _userManager.DeleteAsync(user);
-                return Ok(new JsonResult(dbUser));
+                var dbLocationData = await _ldManager.DeleteAsync(locationData);
+                return Ok(new JsonResult(dbLocationData));
             }
             catch (Exception ex)
             {

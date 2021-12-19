@@ -27,7 +27,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/user/",
+      "launchUrl": "api/",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -35,8 +35,8 @@
     "Thunderstruck.RestApi": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/user/",
-      "applicationUrl": "https://localhost:5001;https://192.168.1.32:5001;http://192.168.1.32:5000",
+      "launchUrl": "api/",
+      "applicationUrl": "https://localhost:5001;https://192.168.0.183:5001;http://192.168.0.183:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

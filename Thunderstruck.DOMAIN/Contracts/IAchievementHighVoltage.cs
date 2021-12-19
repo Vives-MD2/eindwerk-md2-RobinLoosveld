@@ -1,6 +1,6 @@
 ﻿namespace Thunderstruck.DOMAIN.Contracts
 {
-    public interface IAchievementHighVoltage
+    public interface IAchievementHighVoltage:IAchievement
     {
         
     }

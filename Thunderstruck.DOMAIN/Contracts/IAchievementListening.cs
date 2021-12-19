@@ -1,6 +1,6 @@
 ﻿namespace Thunderstruck.DOMAIN.Contracts
 {
-    public interface IAchievementListening
+    public interface IAchievementListening:IAchievement
     {
         
     }

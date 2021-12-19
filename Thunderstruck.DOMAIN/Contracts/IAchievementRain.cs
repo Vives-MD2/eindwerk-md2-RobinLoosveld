@@ -1,6 +1,6 @@
 ﻿namespace Thunderstruck.DOMAIN.Contracts
 {
-    public interface IAchievementRain
+    public interface IAchievementRain:IAchievement
     {
         
     }

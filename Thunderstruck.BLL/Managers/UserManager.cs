@@ -51,7 +51,7 @@ namespace Thunderstruck.BLL.Managers
             {
                 entity.Tex = new ThunderstruckException("Invalid Email", ExceptionTypes.Warning);
             }
-            return await _db.CreateAsync(entity);
+            return await _db.UpdateAsync(entity);
         }
 
         public async Task<User> DeleteAsync(User entity)
