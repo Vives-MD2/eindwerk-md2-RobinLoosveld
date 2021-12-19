@@ -12,31 +12,31 @@ namespace Thunderstruck.BLL.Managers
 
         public async Task<UserLocationData> GetByIdAsync(int userId, int locationDataId)
         {
-            throw new System.NotImplementedException();
+            return await _db.GetByIdAsync(userId, locationDataId);
         }
         public async Task<IEnumerable<UserLocationData>> GetAsync(int skip, int take)
         {
-            throw new System.NotImplementedException();
+            return await _db.GetAsync(skip, take);
         }
 
         public async Task<UserLocationData> CreateAsync(UserLocationData entity)
         {
-            throw new System.NotImplementedException();
+            return await _db.CreateAsync(entity);
         }
 
         public async Task<UserLocationData> UpdateAsync(UserLocationData entity)
         {
-            throw new System.NotImplementedException();
+            return await _db.UpdateAsync(entity);
         }
 
         public async Task<UserLocationData> DeleteAsync(UserLocationData entity)
         {
-            throw new System.NotImplementedException();
+            return await _db.DeleteAsync(entity);
         }
-
+        //ToDo: remove the unworthy
         public async Task<UserLocationData> GetByIdAsync(int id)
         {
-            return await _db.
+            throw new System.NotImplementedException();
         }
     }
 }

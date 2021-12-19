@@ -14,6 +14,7 @@ namespace Thunderstruck.BLL.Managers
         {
             return await _db.GetByIdAsync(userId, achievementId);
         }
+        //ToDo: Remove the getbyid with 1 parameter from IBase
         public async Task<UserAchievement> GetByIdAsync(int id)
         {
             throw new System.NotImplementedException();

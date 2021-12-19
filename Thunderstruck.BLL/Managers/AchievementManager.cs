@@ -14,7 +14,7 @@ namespace Thunderstruck.BLL.Managers
     public class AchievementManager:IAchievement, IAchievementRain,IAchievementHighVoltage,IAchievementListening,IAchievementSpeed
     {
         //ToDo: unable to create a basic achievement object because the class is abstract
-        //ToDo: might have to make e manager for each of the derived classes BUT not for the parent class
+        //might have to make e manager for each of the derived classes BUT not for the parent class
         private readonly AchievementDb _db = new AchievementDb();
         public async Task<Achievement> GetByIdAsync(int id)
         {
