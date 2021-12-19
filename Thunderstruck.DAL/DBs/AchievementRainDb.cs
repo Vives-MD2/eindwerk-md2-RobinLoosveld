@@ -11,6 +11,7 @@ namespace Thunderstruck.DAL.DBs
         public Task<Achievement> GetByIdAsync(int id)
         {
             throw new System.NotImplementedException();
+
         }
 
         public Task<IEnumerable<Achievement>> GetAsync(int skip, int take)
