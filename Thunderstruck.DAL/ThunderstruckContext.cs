@@ -11,13 +11,13 @@ namespace Thunderstruck.DAL
     public class ThunderstruckContext : DbContext
     {
         public static string LocalConnectionString { get; set; } = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=ThunderstruckDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-        public static string OnlineConnectionString { get; set; } = @"";
+        public static string OnlineConnectionString { get; set; } = @"Data Source=SQL5108.site4now.net;Initial Catalog=db_a7d32f_robinloosveld;User Id=db_a7d32f_robinloosveld_admin;Password=xamarin5";
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(LocalConnectionString,
-                x => x.UseNetTopologySuite());
-            //optionsBuilder.UseSqlServer(OnlineConnectionString);
+            //optionsBuilder.UseSqlServer(LocalConnectionString,
+            //     x => x.UseNetTopologySuite());
+            optionsBuilder.UseSqlServer(OnlineConnectionString,x => x.UseNetTopologySuite());
             //optionsBuilder.EnableSensitiveDataLogging(true);
         }
         #region DbSets
