@@ -1,4 +1,5 @@
 ﻿using System;
+using Thunderstruck.UI.Views.Root;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,7 +11,7 @@ namespace Thunderstruck.UI
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new NavigationPage(new RootPage());
         }
 
         protected override void OnStart()

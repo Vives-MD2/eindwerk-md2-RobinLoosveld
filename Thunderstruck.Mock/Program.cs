@@ -1,11 +1,13 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Query;
+using Thunderstruck.DAL.DBs;
 using Thunderstruck.DOMAIN.Models;
 
 namespace Thunderstruck.Mock
 {
     class Program
     {
+        //private readonly User
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
