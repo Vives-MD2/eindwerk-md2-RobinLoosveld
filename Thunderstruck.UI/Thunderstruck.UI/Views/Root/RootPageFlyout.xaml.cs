@@ -6,7 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-
+using Thunderstruck.UI.Views.Project;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -33,12 +33,13 @@ namespace Thunderstruck.UI.Views.Root
             {
                 MenuItems = new ObservableCollection<RootPageFlyoutMenuItem>(new[]
                 {
-                    new RootPageFlyoutMenuItem { Id = 0, Title = "Page 1" },
-                    new RootPageFlyoutMenuItem { Id = 1, Title = "Page 2" },
-                    new RootPageFlyoutMenuItem { Id = 2, Title = "Page 3" },
-                    new RootPageFlyoutMenuItem { Id = 3, Title = "Page 4" },
-                    new RootPageFlyoutMenuItem { Id = 4, Title = "Page 5" },
+                    new RootPageFlyoutMenuItem { Id = 0, Title = "Home", TargetType = typeof(HomePage) },
+                    new RootPageFlyoutMenuItem { Id = 1, Title = "Weather", TargetType = typeof(WeatherPage) },
+                    new RootPageFlyoutMenuItem { Id = 2, Title = "Music", TargetType = typeof(MusicPage) },
+                    new RootPageFlyoutMenuItem { Id = 3, Title = "User", TargetType = typeof(UserPage) },
+                    new RootPageFlyoutMenuItem { Id = 3, Title = "About", TargetType = typeof(AboutPage) },
                 });
+
             }
 
             #region INotifyPropertyChanged Implementation
