@@ -33,7 +33,7 @@ namespace Thunderstruck.UI.Views.Root
             {
                 MenuItems = new ObservableCollection<RootPageFlyoutMenuItem>(new[]
                 {
-                    new RootPageFlyoutMenuItem { Id = 0, Title = "Home", TargetType = typeof(HomePage) },
+                    new RootPageFlyoutMenuItem { Id = 0, Title = "HomeTabbed", TargetType = typeof(HomePage) },
                     new RootPageFlyoutMenuItem { Id = 1, Title = "Weather", TargetType = typeof(WeatherPage) },
                     new RootPageFlyoutMenuItem { Id = 2, Title = "Music", TargetType = typeof(MusicPage) },
                     new RootPageFlyoutMenuItem { Id = 3, Title = "User", TargetType = typeof(UserPage) },
