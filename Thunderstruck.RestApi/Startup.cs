@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Newtonsoft.Json;
 
 namespace Thunderstruck.RestApi
@@ -28,16 +29,25 @@ namespace Thunderstruck.RestApi
         {
             //services.AddControllers();
             services.AddMvc()
-                .AddMvcOptions(options =>
-                {
-                    options.EnableEndpointRouting = false;
-                })
+                .AddMvcOptions(options => { options.EnableEndpointRouting = false; })
                 .AddNewtonsoftJson(options =>
                 {
                     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                     options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
                 });
+            services.AddAuthentication(options =>
+                {
+                    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                })
+                .AddCookie()
+                .AddSpotify(options =>
+                {
+                    options.ClientId = "f3fa527a095f46d0a1b70a344978a5d5";
+                    options.ClientSecret = "6e31e86358e843b69cd07ff15139376a";
+                    options.SaveTokens = true;
+                });
         }
+        
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -52,6 +62,7 @@ namespace Thunderstruck.RestApi
             app.UseRouting();
             app.UseDefaultFiles();
             app.UseStaticFiles();
+
             app.UseAuthentication();
             app.UseAuthorization();
 
@@ -60,10 +71,8 @@ namespace Thunderstruck.RestApi
             //    endpoints.MapControllers();
             //});
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute("default", "api/{controller}/{action}");
-            });
+            app.UseMvc(routes => { routes.MapRoute("default", "api/{controller}/{action}"); });
         }
     }
 }
+
