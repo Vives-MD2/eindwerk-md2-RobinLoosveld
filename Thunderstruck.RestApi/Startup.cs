@@ -45,9 +45,9 @@ namespace Thunderstruck.RestApi
                     options.ClientId = "f3fa527a095f46d0a1b70a344978a5d5";
                     options.ClientSecret = "6e31e86358e843b69cd07ff15139376a";
                     options.SaveTokens = true;
+                    options.CallbackPath = "/callback";
                 });
         }
-        
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
