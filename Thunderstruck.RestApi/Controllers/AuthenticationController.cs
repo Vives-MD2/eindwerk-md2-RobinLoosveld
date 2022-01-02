@@ -49,7 +49,7 @@ namespace Thunderstruck.RestApi.Controllers
                     { "refresh_token", auth.Properties.GetTokenValue("refresh_token") ?? string.Empty },
                     { "expires", (auth.Properties.ExpiresUtc?.ToUnixTimeSeconds() ?? -1).ToString() },
                     { "email", email}
-                    //{"scope", "user-read-private" }
+                   // {"scope", "user-read-private playlist-modify-public" }
                 };
 
                 // Build the result url

@@ -1,11 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Newtonsoft.Json;
 using Thunderstruck.UI.AppService;
+using Thunderstruck.UI.AuthenticationModels;
+using Thunderstruck.UI.AuthenticationModels.CurrentWeatherModel;
+using Utf8Json;
 using Xamarin.Forms;
+using JsonSerializer = Utf8Json.JsonSerializer;
 
 namespace Thunderstruck.UI.ViewModels
 {
@@ -13,6 +20,7 @@ namespace Thunderstruck.UI.ViewModels
     {
         private string _enteredLocation;
         private PageService _pageService = new PageService();
+
 
         public string EnteredLocation
         {
@@ -49,12 +57,22 @@ namespace Thunderstruck.UI.ViewModels
             };
             using (var response = await client.SendAsync(request))
             {
-                //create model for deserialization
-                //check online voor een json to model converter
-                response.EnsureSuccessStatusCode();
-                var body = await response.Content.ReadAsStringAsync();
-                Console.WriteLine(body);
-                await Application.Current.MainPage.DisplayAlert("Alert", body.ToString(), "Ok");
+                try
+                {
+                    //create model for deserialization
+                    //check online voor een json to model converter
+                    response.EnsureSuccessStatusCode();
+                    var stream = await response.Content.ReadAsStreamAsync();
+                    var result = await JsonSerializer.DeserializeAsync<CurrentWeatherModel.CurrentWeatherRootModel>(stream);
+                    Console.WriteLine(stream.ToString());
+                    //await Application.Current.MainPage.DisplayAlert("Alert", result, "Ok");
+                }
+                catch (JsonParsingException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    throw;
+                }
+
             }
         }
     }

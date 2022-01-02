@@ -22,6 +22,7 @@ namespace Thunderstruck.UI.Views.Root
         private JsonSerializer _serializer = new JsonSerializer();
         private string _clientId = "f3fa527a095f46d0a1b70a344978a5d5";
         //private string _clientSecret = "6e31e86358e843b69cd07ff15139376a";
+        private List<String> Scopes = new List<string>();
 
         private string _authenticationUrl = "http://user21.vivesxamarin.com/xamarinauth/";
         private string _callback = "http://user21.vivesxamarin.com/callback";
@@ -65,23 +66,17 @@ namespace Thunderstruck.UI.Views.Root
                     //app-remote-control
                     //playlist-modify-private
                     //playlist-modify-public
-                    //playlist-modify-private
-                    var scopes =
-                        "user-read-private " +
-                        "user-read-email " +
-                        "playlist-modify-private " +
-                        "user-read-currently-playing " +
-                        "app-remote-control " +
-                        "playlist-modify-public ";
-                   //this doesn't specify the required scopes but does actually seem to redirect correctly
-                    var authUrl = new Uri(_authenticationUrl + scheme); 
-                    
+
+                    //this doesn't specify the required scopes but does actually seem to redirect correctly
+                    var authUrl = new Uri(_authenticationUrl + scheme);
+                    //var authUrl = new Uri(_authenticationUrl + scheme + "&scope=playlist-modify-private");
+
                     //this returns a url containing a token
-                   var authUrlSpotify = new Uri(
-                        "https://accounts.spotify.com/authorize?response_type=token" +
-                        $"&client_id={_clientId}" +
-                        $"&scope={scopes}" +
-                        $"&redirect_uri={_callback}");
+                    //var authUrlSpotify = new Uri(
+                    //    "https://accounts.spotify.com/authorize?response_type=token" +
+                    //    $"&client_id={_clientId}" +
+                    //    $"&scope={Scopes}" +
+                    //    $"&redirect_uri={_callback}");
 
                     var callbackUrl = new Uri("xamarinessentials://");
                     //await App.Current.MainPage.DisplayAlert("Alert", callbackUrl.ToString(), "Ok");
@@ -89,7 +84,7 @@ namespace Thunderstruck.UI.Views.Root
                 }
 
                 AuthToken = r?.AccessToken ?? r?.IdToken;
-
+             
                 GetUserInfoUsingToken(AuthToken);
                 GetPublicPlaylists(AuthToken);
             }

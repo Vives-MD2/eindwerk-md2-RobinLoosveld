@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OAuth.Claims;
 using Newtonsoft.Json;
+using KestrelServerOptionsSystemdExtensions = Microsoft.AspNetCore.Hosting.KestrelServerOptionsSystemdExtensions;
 
 namespace Thunderstruck.RestApi
 {
@@ -47,7 +48,13 @@ namespace Thunderstruck.RestApi
                     options.ClientSecret = "6e31e86358e843b69cd07ff15139376a";
                     options.SaveTokens = true;
                     options.CallbackPath = "/callback";
-                    //var test= options.Scope;
+                    //options.Scope = {"user-read-email"};
+                    options.Scope.Add("playlist-modify-private");
+                    options.Scope.Add("playlist-modify-public");
+                    options.Scope.Add("user-read-currently-playing");
+                    options.Scope.Add("user-read-email");
+                    options.Scope.Add("app-remote-control");
+                    var test= options.Scope;
                     //var end = options.AuthorizationEndpoint;
                     //options.AuthorizationEndpoint; //+= "&scope=user-read-private playlist-modify-private";
                 });
