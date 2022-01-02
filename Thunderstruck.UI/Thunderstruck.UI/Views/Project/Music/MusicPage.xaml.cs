@@ -10,12 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace Thunderstruck.UI.Views.Project
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AboutPage : ContentPage
+    public partial class MusicPage : TabbedPage
     {
-        public AboutPage(User user)
+        public MusicPage(User user)
         {
             InitializeComponent();
-            lblUser.Text = user.Email;
         }
     }
 }

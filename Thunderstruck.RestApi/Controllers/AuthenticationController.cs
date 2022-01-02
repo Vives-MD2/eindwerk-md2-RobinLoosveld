@@ -17,6 +17,15 @@ namespace Thunderstruck.RestApi.Controllers
         [HttpGet("{scheme}")]
         public async Task Get([FromRoute] string scheme)
         {
+            //var scopes = new List<string>()
+            //{
+            //    "user-read-currently-playing",
+            //    "user-read-email",
+            //    "app-remote-control",
+            //    "playlist-modify-private",
+            //    "playlist-modify-public",
+            //    "playlist-modify-private"
+            //};
             var auth = await Request.HttpContext.AuthenticateAsync(scheme);
 
             if (!auth.Succeeded
@@ -29,9 +38,9 @@ namespace Thunderstruck.RestApi.Controllers
             }
             else
             {
-                var claims = auth.Principal.Identities.FirstOrDefault()?.Claims;
+                var claims = auth.Principal.Identities.FirstOrDefault()?.Claims; 
                 var email = string.Empty;
-                email = claims?.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.Email)?.Value;
+                email = claims?.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.Email)?.Value; 
 
                 // Get parameters to send back to the callback
                 var qs = new Dictionary<string, string>
@@ -39,7 +48,8 @@ namespace Thunderstruck.RestApi.Controllers
                     { "access_token", auth.Properties.GetTokenValue("access_token") },
                     { "refresh_token", auth.Properties.GetTokenValue("refresh_token") ?? string.Empty },
                     { "expires", (auth.Properties.ExpiresUtc?.ToUnixTimeSeconds() ?? -1).ToString() },
-                    { "email", email }
+                    { "email", email}
+                    //{"scope", "user-read-private" }
                 };
 
                 // Build the result url

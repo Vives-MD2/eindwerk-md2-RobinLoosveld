@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Thunderstruck.UI.Views.Project
+namespace Thunderstruck.UI.Views.Project.Forecast
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MusicPage : TabbedPage
+    public partial class ForecastTomorrow : ContentPage
     {
-        public MusicPage()
+        public ForecastTomorrow()
         {
             InitializeComponent();
         }

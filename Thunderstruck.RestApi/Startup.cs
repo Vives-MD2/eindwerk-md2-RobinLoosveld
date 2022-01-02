@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OAuth.Claims;
 using Newtonsoft.Json;
 
 namespace Thunderstruck.RestApi
@@ -46,6 +47,9 @@ namespace Thunderstruck.RestApi
                     options.ClientSecret = "6e31e86358e843b69cd07ff15139376a";
                     options.SaveTokens = true;
                     options.CallbackPath = "/callback";
+                    //var test= options.Scope;
+                    //var end = options.AuthorizationEndpoint;
+                    //options.AuthorizationEndpoint; //+= "&scope=user-read-private playlist-modify-private";
                 });
         }
 

@@ -15,7 +15,7 @@ namespace Thunderstruck.UI.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            //
+            //Todo
             Xamarin.Auth.CustomTabsConfiguration.CustomTabsClosingMessage = null;
 
             LoadApplication(new App());
