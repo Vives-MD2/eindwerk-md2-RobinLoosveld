@@ -42,7 +42,6 @@ namespace Thunderstruck.UI.ViewModels
         private async Task GetCurrentWeatherByLocationText()
         {
 
-            //string location = "Kortrijk";
             var client = new HttpClient();
             var request = new HttpRequestMessage
             {

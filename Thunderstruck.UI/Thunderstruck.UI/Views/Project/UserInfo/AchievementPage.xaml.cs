@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Thunderstruck.UI.Views.Project.Forecast
+namespace Thunderstruck.UI.Views.Project.UserInfo
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ForecastTomorrow : ContentPage
+    public partial class AchievementPage : ContentPage
     {
-        public ForecastTomorrow()
+        public AchievementPage()
         {
             InitializeComponent();
         }

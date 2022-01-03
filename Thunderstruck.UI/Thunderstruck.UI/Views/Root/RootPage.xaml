@@ -2,14 +2,15 @@
 <FlyoutPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Thunderstruck.UI.Views.Root.RootPage"
-             xmlns:pages="clr-namespace:Thunderstruck.UI.Views.Root">
+             xmlns:pages="clr-namespace:Thunderstruck.UI.Views.Root"
+             xmlns:userInfo="clr-namespace:Thunderstruck.UI.Views.Project.UserInfo;assembly=Thunderstruck.UI">
   <FlyoutPage.Flyout>
     <pages:RootPageFlyout x:Name="FlyoutPage" />
   </FlyoutPage.Flyout>
   <FlyoutPage.Detail>
     <NavigationPage>
       <x:Arguments>
-        <pages:RootPageDetail />
+        <userInfo:LoginPage />
       </x:Arguments>
     </NavigationPage>
   </FlyoutPage.Detail>

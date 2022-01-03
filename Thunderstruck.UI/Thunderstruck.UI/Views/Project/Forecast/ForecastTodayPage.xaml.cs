@@ -14,15 +14,14 @@ namespace Thunderstruck.UI.Views.Project.Forecast
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
 
-    public partial class ForecastToday : ContentPage
+    public partial class ForecastTodayPage : ContentPage
     {
 
-        public ForecastToday()
+        public ForecastTodayPage()
         {
             InitializeComponent();
             BindingContext = new ForecastTodayViewModel();
         }
-
         private async void BtnToday_OnClicked(object sender, EventArgs e)
         {
             //get current weather
@@ -32,7 +31,6 @@ namespace Thunderstruck.UI.Views.Project.Forecast
                 await Application.Current.MainPage.DisplayAlert("Alert", "Please enter a valid location and try again.", "Ok");
             }
         }
-
 
     }
 }

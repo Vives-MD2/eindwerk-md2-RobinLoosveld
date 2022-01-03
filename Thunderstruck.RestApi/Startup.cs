@@ -48,7 +48,7 @@ namespace Thunderstruck.RestApi
                     options.ClientSecret = "6e31e86358e843b69cd07ff15139376a";
                     options.SaveTokens = true;
                     options.CallbackPath = "/callback";
-                    //options.Scope = {"user-read-email"};
+                    //scopes
                     options.Scope.Add("playlist-modify-private");
                     options.Scope.Add("playlist-modify-public");
                     options.Scope.Add("user-read-currently-playing");

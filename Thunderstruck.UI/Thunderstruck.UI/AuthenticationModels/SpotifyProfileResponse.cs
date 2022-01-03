@@ -1,11 +1,38 @@
-﻿namespace Thunderstruck.UI.AuthenticationModels
+﻿using System.Collections.Generic;
+
+namespace Thunderstruck.UI.AuthenticationModels
 {
-    public class SpotifyProfileResponse
+    // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse); 
+    public class ExplicitContent
     {
-        public string country { get; set; }
-        public string display_name { get; set; }
-        public string email { get; set; }
-        public string explicit_content { get; set; }
-        public string id { get; set; }
+        public bool filter_enabled;
+        public bool filter_locked;
+    }
+
+    public class ExternalUrls
+    {
+        public string spotify;
+    }
+
+    public class Followers
+    {
+        public object href;
+        public int total;
+    }
+
+    public class SpotifyUserRoot
+    {
+        public string country;
+        public string display_name;
+        public string email;
+        public ExplicitContent explicit_content;
+        public ExternalUrls external_urls;
+        public Followers followers;
+        public string href;
+        public string id;
+        public List<object> images;
+        public string product;
+        public string type;
+        public string uri;
     }
 }

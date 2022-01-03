@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Thunderstruck.DOMAIN.Models;
+﻿using Thunderstruck.DOMAIN.Models;
+using Thunderstruck.UI.Views.Project.Music;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Thunderstruck.UI.Views.Project
+namespace Thunderstruck.UI.Views.Project.Music
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MusicPage : TabbedPage

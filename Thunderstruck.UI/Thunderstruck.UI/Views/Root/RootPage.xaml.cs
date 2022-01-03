@@ -16,6 +16,7 @@ namespace Thunderstruck.UI.Views.Root
         {
             InitializeComponent();
             FlyoutPage.ListView.ItemSelected += ListView_ItemSelected;
+            NavigationPage.SetHasNavigationBar(this, false);
         }
 
         private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)

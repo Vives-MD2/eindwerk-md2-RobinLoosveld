@@ -5,8 +5,6 @@
              Title="Home">
   <StackLayout Padding="10">
       <StackLayout>
-          <Label x:Name="lblLogin" Text="Spotify Log In"/>
-          <Button x:Name="btnLogin" Text="Log In" Clicked="BtnLogin_OnClicked"/>
       </StackLayout>
     </StackLayout>
 </ContentPage>

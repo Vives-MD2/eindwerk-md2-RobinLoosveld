@@ -17,15 +17,6 @@ namespace Thunderstruck.RestApi.Controllers
         [HttpGet("{scheme}")]
         public async Task Get([FromRoute] string scheme)
         {
-            //var scopes = new List<string>()
-            //{
-            //    "user-read-currently-playing",
-            //    "user-read-email",
-            //    "app-remote-control",
-            //    "playlist-modify-private",
-            //    "playlist-modify-public",
-            //    "playlist-modify-private"
-            //};
             var auth = await Request.HttpContext.AuthenticateAsync(scheme);
 
             if (!auth.Succeeded
@@ -49,7 +40,6 @@ namespace Thunderstruck.RestApi.Controllers
                     { "refresh_token", auth.Properties.GetTokenValue("refresh_token") ?? string.Empty },
                     { "expires", (auth.Properties.ExpiresUtc?.ToUnixTimeSeconds() ?? -1).ToString() },
                     { "email", email}
-                   // {"scope", "user-read-private playlist-modify-public" }
                 };
 
                 // Build the result url
