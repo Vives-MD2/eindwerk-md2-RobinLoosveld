@@ -6,9 +6,9 @@ using System.Windows.Input;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Newtonsoft.Json;
 using Thunderstruck.DOMAIN.Models;
+using Thunderstruck.UI.ApiModels.UserModels;
 using Thunderstruck.UI.AppService;
 using Thunderstruck.UI.AppService.Contracts;
-using Thunderstruck.UI.AuthenticationModels;
 using Thunderstruck.UI.Views.Project;
 using Thunderstruck.UI.Views.Project.UserInfo;
 using Xamarin.Essentials;
@@ -20,6 +20,7 @@ namespace Thunderstruck.UI.ViewModels
     {
         //private string _clientId = "f3fa527a095f46d0a1b70a344978a5d5";
         private string _authenticationUrl = "http://user21.vivesxamarin.com/xamarinauth/";
+       
         private JsonSerializer _serializer = new JsonSerializer();
         private PageService _pageService = new PageService();
 
@@ -28,6 +29,7 @@ namespace Thunderstruck.UI.ViewModels
 
         public LoginViewModel()
         {
+            //to bind to the login button
             LoginSpotifyCommand = new Command(async x=> await LoginSpotify());
         }
 
@@ -70,7 +72,7 @@ namespace Thunderstruck.UI.ViewModels
 
                 GetUserInfoUsingToken(AuthToken);
                 GetPublicPlaylists(AuthToken);
-                _pageService.PushAsync(new UserProfilePage(new User()));
+                //await _pageService.PushAsync(new UserProfilePage(new User()));
             }
             catch (Exception ex)
             {
@@ -92,7 +94,7 @@ namespace Thunderstruck.UI.ViewModels
             using (var reader = new StreamReader(stream))
             using (var json = new JsonTextReader(reader))
             {
-                var jsoncontent = _serializer.Deserialize<SpotifyUserRoot>(json);
+                var jsoncontent = _serializer.Deserialize<SpotifyUserRootModel>(json);
                 await SecureStorage.SetAsync("UserToken", authToken);
                 //Not the best way to save auth token and check if authtoken has expired instead try implementing refresh token
                 await App.Current.MainPage.DisplayAlert("It Worked?", jsoncontent.email, "Ok");

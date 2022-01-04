@@ -7,9 +7,8 @@ using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Newtonsoft.Json;
+using Thunderstruck.UI.ApiModels.CurrentWeatherModel;
 using Thunderstruck.UI.AppService;
-using Thunderstruck.UI.AuthenticationModels;
-using Thunderstruck.UI.AuthenticationModels.CurrentWeatherModel;
 using Utf8Json;
 using Xamarin.Forms;
 using JsonSerializer = Utf8Json.JsonSerializer;
@@ -62,8 +61,8 @@ namespace Thunderstruck.UI.ViewModels
                     //check online voor een json to model converter
                     response.EnsureSuccessStatusCode();
                     var stream = await response.Content.ReadAsStreamAsync();
-                    var result = await JsonSerializer.DeserializeAsync<CurrentWeatherModel.CurrentWeatherRootModel>(stream);
-                    Console.WriteLine(stream.ToString());
+                    var result = await JsonSerializer.DeserializeAsync<CurrentWeatherModelRoot>(stream);
+                    Console.WriteLine(result.name);
                     //await Application.Current.MainPage.DisplayAlert("Alert", result, "Ok");
                 }
                 catch (JsonParsingException ex)

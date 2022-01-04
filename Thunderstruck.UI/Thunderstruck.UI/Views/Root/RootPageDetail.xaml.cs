@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using SpotifyAPI.Web;
 using Thunderstruck.DOMAIN.Models;
-using Thunderstruck.UI.AuthenticationModels;
 using Thunderstruck.UI.Views.Project;
 using Xamarin.Essentials;
 using Xamarin.Forms;

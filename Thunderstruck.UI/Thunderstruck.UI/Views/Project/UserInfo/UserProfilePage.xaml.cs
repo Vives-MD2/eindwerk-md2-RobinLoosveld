@@ -12,6 +12,7 @@ namespace Thunderstruck.UI.Views.Project.UserInfo
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class UserProfilePage : ContentPage
     {
+        
         public UserProfilePage(User user)
         {
             InitializeComponent();

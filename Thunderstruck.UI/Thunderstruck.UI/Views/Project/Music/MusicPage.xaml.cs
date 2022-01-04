@@ -12,5 +12,10 @@ namespace Thunderstruck.UI.Views.Project.Music
         {
             InitializeComponent();
         }
+
+        public MusicPage()
+        {
+            InitializeComponent();
+        }
     }
 }
