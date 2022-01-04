@@ -132,12 +132,15 @@ namespace Thunderstruck.UI.ViewModels
             using (var json = new JsonTextReader(reader))
             {
                 CurrentUser = _serializer.Deserialize<SpotifyUserRootModel>(json);
+                await SecureStorage.SetAsync("CurrentUserUsername", CurrentUser.display_name);
+                await SecureStorage.SetAsync("CurrentUserEmail", CurrentUser.email);
+               
                 await SecureStorage.SetAsync("UserToken", authToken);
                 //Not the best way to save auth token and check if authtoken has expired instead try implementing refresh token
                 await App.Current.MainPage.DisplayAlert("It Worked?", CurrentUser.email + CurrentUser.id, "Ok");
 
             }
-            //user the user info to add a user to the db
+            //use the spotifyuser info to add a user to the db
             using (ApiService<IUserApi> service = new ApiService<IUserApi>(GlobalVars.ThunderstruckApiOnline))
             {
                 var response = await service.myService.GetByEmail(CurrentUser.email);

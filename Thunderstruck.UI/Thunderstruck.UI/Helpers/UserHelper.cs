@@ -35,7 +35,7 @@ namespace Thunderstruck.UI.Helpers
             bool isExpired = false;
             if (expirationDateTimestamp.CompareTo(DateTimeOffset.Now) > 0)
             {
-                //is equal to current time or has expired
+                //timestamp > current time
                 isExpired = true;
             }
             return isExpired;
