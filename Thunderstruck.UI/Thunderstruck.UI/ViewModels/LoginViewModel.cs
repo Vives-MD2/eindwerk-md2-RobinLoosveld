@@ -1,14 +1,19 @@
 ﻿using System;
 using System.IO;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Newtonsoft.Json;
+using SpotifyAPI.Web;
 using Thunderstruck.DOMAIN.Models;
+using Thunderstruck.UI.Api;
+using Thunderstruck.UI.Api.Contracts;
 using Thunderstruck.UI.ApiModels.UserModels;
 using Thunderstruck.UI.AppService;
 using Thunderstruck.UI.AppService.Contracts;
+using Thunderstruck.UI.Helpers;
 using Thunderstruck.UI.Views.Project;
 using Thunderstruck.UI.Views.Project.UserInfo;
 using Xamarin.Essentials;
@@ -26,11 +31,26 @@ namespace Thunderstruck.UI.ViewModels
 
         //commands
         public ICommand LoginSpotifyCommand { get; set; }
+        private SpotifyUserRootModel _currentUser { get; set; }
+
+        public SpotifyUserRootModel CurrentUser
+        {
+            get=>_currentUser;
+            set
+            {
+                if (value == _currentUser) return;
+                {
+                    _currentUser = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         public LoginViewModel()
         {
             //to bind to the login button
             LoginSpotifyCommand = new Command(async x=> await LoginSpotify());
+            CurrentUser = new SpotifyUserRootModel();
         }
 
         private string _authToken;
@@ -46,7 +66,7 @@ namespace Thunderstruck.UI.ViewModels
         }
         private async Task LoginSpotify()
         {
-            var test = await Geolocation.GetLastKnownLocationAsync();
+            Location test = await Geolocation.GetLocationAsync();
             string scheme = "Spotify";
             try
             {
@@ -72,8 +92,7 @@ namespace Thunderstruck.UI.ViewModels
                 var timestamp = r.Timestamp;
 
                 GetUserInfoUsingToken(AuthToken);
-                GetPublicPlaylists(AuthToken);
-                //await _pageService.PushAsync(new UserProfilePage(new User()));
+                //GetPublicPlaylists(AuthToken);
             }
             catch (Exception ex)
             {
@@ -82,34 +101,35 @@ namespace Thunderstruck.UI.ViewModels
                 await App.Current.MainPage.DisplayAlert("Alert", ex.Message, "Ok");
             }
         }
-        private void GetPublicPlaylists(string authToken)
-        {
-            HttpClient httpClient = new HttpClient();
-        }
+        //private void GetPublicPlaylists(string authToken)
+        //{
+        //    HttpClient httpClient = new HttpClient();
+        //}
         private async void GetUserInfoUsingToken(string authToken)
         {
             HttpClient httpClient = new HttpClient();
             httpClient.BaseAddress = new Uri("https://api.spotify.com/v1/me");
-            var httpResponseMessage = await httpClient.GetAsync("tokeninfo?access_token=" + authToken);
+            //The token needs to be added as a header for this to wordk
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",authToken);
+            var httpResponseMessage = await httpClient.GetAsync("https://api.spotify.com/v1/me");
+
             using (var stream = await httpResponseMessage.Content.ReadAsStreamAsync())
             using (var reader = new StreamReader(stream))
             using (var json = new JsonTextReader(reader))
             {
-                var jsoncontent = _serializer.Deserialize<SpotifyUserRootModel>(json);
+                CurrentUser = _serializer.Deserialize<SpotifyUserRootModel>(json);
                 await SecureStorage.SetAsync("UserToken", authToken);
                 //Not the best way to save auth token and check if authtoken has expired instead try implementing refresh token
-                await App.Current.MainPage.DisplayAlert("It Worked?", jsoncontent.email, "Ok");
+                await App.Current.MainPage.DisplayAlert("It Worked?", CurrentUser.email + CurrentUser.id, "Ok");
 
-                await _pageService.PushAsync(new UserProfilePage(new User { Email = jsoncontent.email }));
+                await _pageService.PushAsync(new UserProfilePage(new User { Email = CurrentUser.email }));
             }
-        }
-
-        private async Task CheckIfTokenHasExpired(DateTimeOffset timestamp)
-        {
-            if (timestamp.CompareTo(DateTimeOffset.Now) <= 0)
+            //user the user info to add a user to the db
+            using (ApiService<IUserApi> service = new ApiService<IUserApi>(GlobalVars.ThunderstruckApiOnline))
             {
-                //is equal to current time or has expired
+                var dbUser = UserHelper.MapSpotifyUserToDbUser(CurrentUser);
             }
         }
+
     }
 }

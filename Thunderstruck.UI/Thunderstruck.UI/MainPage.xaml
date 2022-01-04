@@ -6,5 +6,4 @@
     <StackLayout>
         <Label x:Name=" lblLogin" Text="Spotify Log In"/>
     </StackLayout>
-
 </ContentPage>
