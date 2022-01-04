@@ -62,8 +62,8 @@ namespace Thunderstruck.UI.ViewModels
                     response.EnsureSuccessStatusCode();
                     var stream = await response.Content.ReadAsStreamAsync();
                     var result = await JsonSerializer.DeserializeAsync<CurrentWeatherModelRoot>(stream);
-                    Console.WriteLine(result.name);
-                    //await Application.Current.MainPage.DisplayAlert("Alert", result, "Ok");
+                    //Console.WriteLine(result.rain._1h);
+                    await Application.Current.MainPage.DisplayAlert("Alert", result.name + result.coord.lat, "Ok");
                 }
                 catch (JsonParsingException ex)
                 {

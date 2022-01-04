@@ -46,6 +46,7 @@ namespace Thunderstruck.UI.ViewModels
         }
         private async Task LoginSpotify()
         {
+            var test = await Geolocation.GetLastKnownLocationAsync();
             string scheme = "Spotify";
             try
             {
