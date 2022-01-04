@@ -23,9 +23,9 @@ namespace Thunderstruck.UI.Views.Project.Forecast
             BindingContext = new ForecastTodayViewModel();
         }
         private async void BtnToday_OnClicked(object sender, EventArgs e)
-        {
+        { 
             //get current weather
-           // await GetCurrentWeatherByLocationText();
+            // await GetCurrentWeatherByLocationText();
             if (eEnterLocation.Text is null)
             {
                 await Application.Current.MainPage.DisplayAlert("Alert", "Please enter a valid location and try again.", "Ok");

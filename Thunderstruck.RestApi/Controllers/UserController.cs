@@ -29,7 +29,19 @@ namespace Thunderstruck.RestApi.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
+        [HttpGet("GetByEmail")]
+        public async Task<IActionResult> GetByEmail([FromQuery(Name = "email")] string email)
+        {
+            try
+            {
+                var dbUser = await _userManager.GetByEmailAsync(email);
+                return Ok(new JsonResult(dbUser));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
         [HttpGet("Get")]
         public async Task<IActionResult> Get([FromQuery(Name = "skip")] int skip, [FromQuery(Name = "take")] int take)
         {

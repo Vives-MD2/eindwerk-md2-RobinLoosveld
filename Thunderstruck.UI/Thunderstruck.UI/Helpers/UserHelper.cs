@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Thunderstruck.DOMAIN.Models;
-using Thunderstruck.UI.ApiModels.UserModels;
+using Thunderstruck.UI.ResponseModels.UserModels;
 
 namespace Thunderstruck.UI.Helpers
 {
@@ -33,7 +33,7 @@ namespace Thunderstruck.UI.Helpers
         public static async Task<bool> CheckIfTokenHasExpired(DateTimeOffset expirationDateTimestamp, string authToken)
         {
             bool isExpired = false;
-            if (expirationDateTimestamp.CompareTo(DateTimeOffset.Now) <= 0)
+            if (expirationDateTimestamp.CompareTo(DateTimeOffset.Now) > 0)
             {
                 //is equal to current time or has expired
                 isExpired = true;

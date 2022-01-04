@@ -1,4 +1,4 @@
-﻿namespace Thunderstruck.UI.ApiModels
+﻿namespace Thunderstruck.UI.ResponseModels
 {
     public class GoogleModel
     {

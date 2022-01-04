@@ -30,7 +30,21 @@ namespace Thunderstruck.BLL.Managers
                 Tex = new ThunderstruckException("No user found.", ExceptionTypes.Warning)
             };
         }
-
+        public async Task<User> GetByEmailAsync(string email)
+        {
+            if (!IsValidEmail(email))
+            {
+                return new User()
+                {
+                    Tex = new ThunderstruckException("The user email is invalid.", ExceptionTypes.Warning)
+                };
+            }
+            var user = await _db.GetByEmailAsync(email);
+            return user ?? new User()
+            {
+                Tex = new ThunderstruckException("No user found.", ExceptionTypes.Warning)
+            };
+        }
         public async Task<IEnumerable<User>> GetAsync(int skip, int take)
         {
             return await _db.GetAsync(skip, take);

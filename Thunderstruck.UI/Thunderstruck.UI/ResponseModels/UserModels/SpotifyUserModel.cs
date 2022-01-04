@@ -1,4 +1,4 @@
-﻿namespace Thunderstruck.UI.ApiModels.UserModels
+﻿namespace Thunderstruck.UI.ResponseModels.UserModels
 {
     public class SpotifyUserRootModel
     {

@@ -1,4 +1,4 @@
-﻿namespace Thunderstruck.UI.ApiModels.CurrentWeatherModel
+﻿namespace Thunderstruck.UI.ResponseModels.WeatherModels
 {
 
     public class CurrentWeatherModelRoot

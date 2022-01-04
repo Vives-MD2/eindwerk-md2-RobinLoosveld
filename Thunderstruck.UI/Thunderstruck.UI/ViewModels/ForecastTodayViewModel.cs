@@ -7,8 +7,8 @@ using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Newtonsoft.Json;
-using Thunderstruck.UI.ApiModels.CurrentWeatherModel;
 using Thunderstruck.UI.AppService;
+using Thunderstruck.UI.ResponseModels.WeatherModels;
 using Utf8Json;
 using Xamarin.Forms;
 using JsonSerializer = Utf8Json.JsonSerializer;
@@ -31,7 +31,6 @@ namespace Thunderstruck.UI.ViewModels
                 OnPropertyChanged();
             }
         }
-
         public ICommand GetCurrentWeatherCommand { get; set; }
 
         public ForecastTodayViewModel()
@@ -42,6 +41,7 @@ namespace Thunderstruck.UI.ViewModels
         {
 
             var client = new HttpClient();
+
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,

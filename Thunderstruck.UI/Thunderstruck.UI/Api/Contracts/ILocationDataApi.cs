@@ -8,7 +8,7 @@ namespace Thunderstruck.UI.Api.Contracts
     {
         [Get("locationdata/getbyid?id={id}")]
         Task<string> GetById(int id);
-        [Get("/locationdata/get?skip&take={take}")]
+        [Get("/locationdata/get?skip={skip}&take={take}")]
         Task<string> Get(int skip, int take);
         [Post("/locationdata/create")]
         Task<string> Create([Body] LocationData locationData);

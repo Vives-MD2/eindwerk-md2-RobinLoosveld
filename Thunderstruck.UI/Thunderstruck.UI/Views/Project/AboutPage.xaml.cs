@@ -12,6 +12,10 @@ namespace Thunderstruck.UI.Views.Project
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AboutPage : ContentPage
     {
+        public AboutPage()
+        {
+            InitializeComponent();
+        }
         public AboutPage(User user)
         {
             InitializeComponent();

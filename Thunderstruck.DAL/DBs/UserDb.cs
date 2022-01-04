@@ -23,6 +23,13 @@ namespace Thunderstruck.DAL.DBs
                 .SingleOrDefaultAsync(x => x.Id == id);
         }
 
+        public async Task<User> GetByEmailAsync(string email)
+        {
+            return await _context.User.AsNoTracking()
+                .Include(s => s.UserAchievements)
+                .Include(x => x.UserLocationsData)
+                .SingleOrDefaultAsync(x => x.Email == email);
+        }
         public async Task<IEnumerable<User>> GetAsync(int skip, int take)
         {
             return await _context.User.AsNoTracking()
@@ -43,7 +50,6 @@ namespace Thunderstruck.DAL.DBs
             _context.User.Attach(entity);
             _context.Entry<User>(entity).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-
             return entity;
         }
 
