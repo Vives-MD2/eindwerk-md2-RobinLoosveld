@@ -1,25 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Newtonsoft.Json;
+using Thunderstruck.DOMAIN.Contracts;
+using Thunderstruck.DOMAIN.Models;
+using Thunderstruck.UI.Api;
+using Thunderstruck.UI.Api.Contracts;
 using Thunderstruck.UI.AppService;
+using Thunderstruck.UI.Helpers;
 using Thunderstruck.UI.ResponseModels.WeatherModels;
 using Utf8Json;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using JsonSerializer = Utf8Json.JsonSerializer;
 
 namespace Thunderstruck.UI.ViewModels
 {
-    public class ForecastTodayViewModel:BaseViewModel
+    public class ForecastTodayViewModel : BaseViewModel
     {
+        //using Geolocation
+        //Source:  https://docs.microsoft.com/en-us/xamarin/essentials/geolocation?context=xamarin%2Fandroid&tabs=android
+
         private string _enteredLocation;
         private PageService _pageService = new PageService();
-
 
         public string EnteredLocation
         {
@@ -32,10 +42,14 @@ namespace Thunderstruck.UI.ViewModels
             }
         }
         public ICommand GetCurrentWeatherCommand { get; set; }
+        //info: https://docs.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken?view=net-6.0
+        public CancellationTokenSource Cts { get; set; }
+
 
         public ForecastTodayViewModel()
         {
             GetCurrentWeatherCommand = new Command(async x => await GetCurrentWeatherByLocationText());
+            GetCurrentLocation();
         }
         private async Task GetCurrentWeatherByLocationText()
         {
@@ -72,6 +86,46 @@ namespace Thunderstruck.UI.ViewModels
                 }
 
             }
+        }
+
+        private async Task GetCurrentLocation()
+        {
+            try
+            {
+                var request = new GeolocationRequest(GeolocationAccuracy.Medium, TimeSpan.FromSeconds(10));
+                Cts = new CancellationTokenSource();
+                var location = await Geolocation.GetLocationAsync(request, Cts.Token);
+
+                if (location != null)
+                {
+                    Debug.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
+                    var locationData = new LocationData { Location = LocationDataHelper.ConvertLocationToPoint(location), TimeStamp = DateTime.UtcNow };
+                    await AddCurrentLocationToDb(locationData);
+                }
+
+                Point test = new Point { };
+            }
+            catch (FeatureNotSupportedException fnsEx)
+            {
+                // Handle not supported on device exception
+            }
+            catch (FeatureNotEnabledException fneEx)
+            {
+                // Handle not enabled on device exception
+            }
+            catch (PermissionException pEx)
+            {
+                // Handle permission exception
+            }
+            catch (Exception ex)
+            {
+                // Unable to get location
+            }
+        }
+        private async Task AddCurrentLocationToDb(LocationData locationData)
+        {
+            using ApiService<ILocationDataApi> service = new ApiService<ILocationDataApi>(GlobalVars.ThunderstruckApiOnline);
+            await service.myService.Create(locationData);
         }
     }
 }

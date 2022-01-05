@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 using Refit;
 using Thunderstruck.UI.ViewModels;
 using Xamarin.Forms;
@@ -30,6 +31,14 @@ namespace Thunderstruck.UI.Views.Project.Forecast
             {
                 await Application.Current.MainPage.DisplayAlert("Alert", "Please enter a valid location and try again.", "Ok");
             }
+        }
+
+        protected override void OnDisappearing()
+        {
+            var cts = (BindingContext as ForecastTodayViewModel).Cts;
+            if (cts != null && !cts.IsCancellationRequested)
+                cts.Cancel();
+            base.OnDisappearing();
         }
 
     }
