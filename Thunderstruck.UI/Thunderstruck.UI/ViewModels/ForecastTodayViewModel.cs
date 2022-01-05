@@ -5,9 +5,12 @@ using System.IO;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using NetTopologySuite.IO.Converters;
 using Newtonsoft.Json;
 using Thunderstruck.DOMAIN.Contracts;
 using Thunderstruck.DOMAIN.Models;
@@ -16,20 +19,26 @@ using Thunderstruck.UI.Api.Contracts;
 using Thunderstruck.UI.AppService;
 using Thunderstruck.UI.Helpers;
 using Thunderstruck.UI.ResponseModels.WeatherModels;
+using Thunderstruck.UI.Views.Utils;
 using Utf8Json;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using JsonConverter = Newtonsoft.Json.JsonConverter;
 using JsonSerializer = Utf8Json.JsonSerializer;
 
 namespace Thunderstruck.UI.ViewModels
 {
-    public class ForecastTodayViewModel : BaseViewModel
+    public class ForecastTodayViewModel : BaseViewModel //GeoJsonConverterFactory
     {
         //using Geolocation
         //Source:  https://docs.microsoft.com/en-us/xamarin/essentials/geolocation?context=xamarin%2Fandroid&tabs=android
 
         private string _enteredLocation;
+
         private PageService _pageService = new PageService();
+
+        //
+        private HttpClient _httpClient;
 
         public string EnteredLocation
         {
@@ -41,16 +50,20 @@ namespace Thunderstruck.UI.ViewModels
                 OnPropertyChanged();
             }
         }
+
         public ICommand GetCurrentWeatherCommand { get; set; }
+        public ICommand GetCurrentLocationCommand { get; set; }
+
         //info: https://docs.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken?view=net-6.0
-        public CancellationTokenSource Cts { get; set; }
 
 
         public ForecastTodayViewModel()
         {
             GetCurrentWeatherCommand = new Command(async x => await GetCurrentWeatherByLocationText());
-            GetCurrentLocation();
+            GetCurrentLocationCommand = new Command(async x => await GetCurrentLocation());
+            //GetCurrentLocation();
         }
+
         private async Task GetCurrentWeatherByLocationText()
         {
 
@@ -60,7 +73,8 @@ namespace Thunderstruck.UI.ViewModels
             {
                 Method = HttpMethod.Get,
                 RequestUri =
-                    new Uri($"https://community-open-weather-map.p.rapidapi.com/weather?q={EnteredLocation}&units=metric"),
+                    new Uri(
+                        $"https://community-open-weather-map.p.rapidapi.com/weather?q={EnteredLocation}&units=metric"),
                 Headers =
                 {
                     { "x-rapidapi-host", "community-open-weather-map.p.rapidapi.com" },
@@ -90,42 +104,55 @@ namespace Thunderstruck.UI.ViewModels
 
         private async Task GetCurrentLocation()
         {
-            try
-            {
-                var request = new GeolocationRequest(GeolocationAccuracy.Medium, TimeSpan.FromSeconds(10));
-                Cts = new CancellationTokenSource();
-                var location = await Geolocation.GetLocationAsync(request, Cts.Token);
+            //try
+            // {
 
-                if (location != null)
+            //var request = new GeolocationRequest(GeolocationAccuracy.Medium, TimeSpan.FromSeconds(10));
+            //Cts = new CancellationTokenSource();
+            //var location = await Geolocation.GetLocationAsync(request, Cts.Token);
+            //var location = await Geolocation.GetLocationAsync();
+            //if (location != null)
+            //{
+
+            //    Debug.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
+            //var locationData = new LocationData { Location = LocationDataHelper.ConvertLocationToPoint(location), TimeStamp = DateTime.Now };
+
+            //Point mapping
+            //(3.24, 50.83) };
+
+            var location = await Geolocation.GetLocationAsync();
+            using (ApiService<ILocationDataApi> service =
+                   new ApiService<ILocationDataApi>(GlobalVars.ThunderstruckApiOnline))
+            {
+                var locationData = new LocationData
+                    { Location = LocationDataHelper.ConvertLocationToPoint(location), TimeStamp = DateTime.Now };
+                LocationDataWithDouble locationMapObject = new LocationDataWithDouble
                 {
-                    Debug.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
-                    var locationData = new LocationData { Location = LocationDataHelper.ConvertLocationToPoint(location), TimeStamp = DateTime.UtcNow };
-                    await AddCurrentLocationToDb(locationData);
-                }
+                    LocationName = "Test1",
+                    TimeStamp = locationData.TimeStamp,
+                    XLongitude = locationData.Location.X,
+                    YLatitude = locationData.Location.Y
+                };
+                var response = await service.myService.Create(locationMapObject);
+                var test = await service.myService.GetById(8);
+                var test2 = "hi there";
+                //var convertedObject =  JsonConvert.DefaultSettings..DeserializeObject<ApiSingleResponse<LocationData>>(response)?.Value;
+            }
 
-                Point test = new Point { };
-            }
-            catch (FeatureNotSupportedException fnsEx)
-            {
-                // Handle not supported on device exception
-            }
-            catch (FeatureNotEnabledException fneEx)
-            {
-                // Handle not enabled on device exception
-            }
-            catch (PermissionException pEx)
-            {
-                // Handle permission exception
-            }
-            catch (Exception ex)
-            {
-                // Unable to get location
-            }
-        }
-        private async Task AddCurrentLocationToDb(LocationData locationData)
-        {
-            using ApiService<ILocationDataApi> service = new ApiService<ILocationDataApi>(GlobalVars.ThunderstruckApiOnline);
-            await service.myService.Create(locationData);
+            //_httpClient = new HttpClient();
+            //_httpClient.BaseAddress = new Uri("https://api.spotify.com/v1/me");
+
+            //The token needs to be added as a header for this to work
+            //var httpResponseMessage = await _httpClient.PostAsync()
+
+            //private async Task AddCurrentLocationToDb(LocationData locationData)
+            //{
+            //    using ApiService<ILocationDataApi> service = new ApiService<ILocationDataApi>(GlobalVars.ThunderstruckApiOnline);
+            //    {
+
+            //    }
+            //    await service.myService.Create(locationData);
+            //}
         }
     }
 }

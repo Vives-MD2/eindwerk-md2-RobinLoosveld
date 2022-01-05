@@ -1,20 +1,21 @@
 ﻿using System.Threading.Tasks;
 using Refit;
 using Thunderstruck.DOMAIN.Models;
+using Thunderstruck.UI.ResponseModels.WeatherModels;
 
 namespace Thunderstruck.UI.Api.Contracts
 {
     public interface ILocationDataApi
     {
-        [Get("locationdata/getbyid?id={id}")]
+        [Get("/locationdata/getbyid?id={id}")]
         Task<string> GetById(int id);
         [Get("/locationdata/get?skip={skip}&take={take}")]
         Task<string> Get(int skip, int take);
         [Post("/locationdata/create")]
-        Task<string> Create([Body] LocationData locationData);
-        [Put("locationdata/update")]
+        Task<string> Create([Body] LocationDataWithDouble locationData);
+        [Put("/locationdata/update")]
         Task<string> Update([Body] LocationData locationData);
-        [Delete("locationdata/delete")]
+        [Delete("/locationdata/delete")]
         Task<string> Delete([Body] LocationData locationData);
     }
 }

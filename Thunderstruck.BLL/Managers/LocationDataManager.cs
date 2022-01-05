@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Thunderstruck.DAL.DBs;
 using Thunderstruck.DOMAIN.Contracts;
@@ -34,7 +36,9 @@ namespace Thunderstruck.BLL.Managers
         public async Task<LocationData> CreateAsync(LocationData entity)
         {
             //TODO: check of location is valid
-            return await _db.CreateAsync(entity);
+            var result = await _db.CreateAsync(entity);
+            return result;
+            Debug.Print(result.Location.X.ToString());
         }
 
         public async Task<LocationData> UpdateAsync(LocationData entity)

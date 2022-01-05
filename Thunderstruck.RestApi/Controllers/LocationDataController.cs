@@ -3,8 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
+using NetTopologySuite;
+using NetTopologySuite.Geometries;
+using NetTopologySuite.IO.Converters;
 using Thunderstruck.BLL.Managers;
 using Thunderstruck.DOMAIN.Models;
+using Thunderstruck.UI.ResponseModels.WeatherModels;
 
 namespace Thunderstruck.RestApi.Controllers
 {
@@ -13,6 +18,10 @@ namespace Thunderstruck.RestApi.Controllers
     public class LocationDataController : ControllerBase
     {
         private readonly LocationDataManager _ldManager = new LocationDataManager();
+       
+        private readonly IOptions<JsonOptions> _jsonOptions;
+        private readonly NtsGeometryServices _geometryServices = new NtsGeometryServices();
+
         [HttpGet("GetById")]
         public async Task<IActionResult> GetById([FromQuery(Name = "id")] int id)
         {
@@ -45,8 +54,10 @@ namespace Thunderstruck.RestApi.Controllers
             }
         }
         [HttpPost("Create")]
-        public async Task<IActionResult> Create([FromBody] LocationData locationData)
+        public async Task<IActionResult> Create([FromBody] LocationDataWithDouble locationData)
         {
+            var factory =_geometryServices.CreateGeometryFactory(srid: 4326);
+
             try
             {
                 if (locationData is null)
@@ -57,13 +68,48 @@ namespace Thunderstruck.RestApi.Controllers
                     //};
                     throw new NullReferenceException();
                 }
-                var dbLocationData = await _ldManager.CreateAsync(locationData);
+
+                var point = factory.CreatePoint(new Coordinate(locationData.XLongitude, locationData.YLatitude));
+              
+                var mappedLocationData = new LocationData
+                {
+                    LocationName = locationData.LocationName,
+                    TimeStamp = locationData.TimeStamp,
+                    Location = point
+                };
+
+                
+                var dbLocationData = await _ldManager.CreateAsync(mappedLocationData);
                 return Ok(new JsonResult(dbLocationData));
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
+            //var locationDataToConvert = new LocationData();
+            //try
+            //{
+            //    if (locationData is null)
+            //    {
+            //        //return user = new User()
+            //        //{
+            //        //    Tex = new ThunderstruckException("No user object found.", ExceptionTypes.Fatal)
+            //        //};
+            //        throw new NullReferenceException();
+            //    }
+            //    else
+            //    {
+
+            //    }
+        //}
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine(ex);
+        //        throw;
+        //    }
+
+        //        yield return result;
+            
         }
         //TODO: check if update is needed in project
         [HttpPut("Update")]

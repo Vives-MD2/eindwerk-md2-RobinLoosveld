@@ -15,11 +15,13 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="NetTopologySuite.IO.GeoJSON4STJ" Version="2.1.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Thunderstruck.BLL\Thunderstruck.BLL.csproj" />
     <ProjectReference Include="..\Thunderstruck.DAL\Thunderstruck.DAL.csproj" />
+    <ProjectReference Include="..\Thunderstruck.UI\Thunderstruck.UI\Thunderstruck.UI.csproj" />
   </ItemGroup>
 
 </Project>

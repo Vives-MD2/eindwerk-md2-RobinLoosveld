@@ -41,7 +41,7 @@ namespace Thunderstruck.UI.Views.Root
                     new RootPageFlyoutMenuItem { Id = 1, Title = "Forecast", TargetType = typeof(WeatherTabbedPage) },
                     new RootPageFlyoutMenuItem { Id = 2, Title = "Music", TargetType = typeof(MusicPage) },
                     new RootPageFlyoutMenuItem { Id = 3, Title = "User", TargetType = typeof(UserTabbedPage) },
-                    new RootPageFlyoutMenuItem { Id = 3, Title = "About", TargetType = typeof(AboutPage) },
+                    new RootPageFlyoutMenuItem { Id = 4, Title = "About", TargetType = typeof(AboutPage) },
                 });
             }
 

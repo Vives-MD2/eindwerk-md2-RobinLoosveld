@@ -138,7 +138,6 @@ namespace Thunderstruck.UI.ViewModels
                 await SecureStorage.SetAsync("UserToken", authToken);
                 //Not the best way to save auth token and check if authtoken has expired instead try implementing refresh token
                 await App.Current.MainPage.DisplayAlert("It Worked?", CurrentUser.email + CurrentUser.id, "Ok");
-
             }
             //use the spotifyuser info to add a user to the db
             using (ApiService<IUserApi> service = new ApiService<IUserApi>(GlobalVars.ThunderstruckApiOnline))
@@ -152,7 +151,9 @@ namespace Thunderstruck.UI.ViewModels
                     var dbUser = await UserHelper.MapSpotifyUserToDbUser(CurrentUser);
                     await service.myService.Create(dbUser);
                 }
-                await _pageService.PushAsync(new WeatherTabbedPage());
+
+                //create new stack
+                await _pageService.PushModelAsync(new WeatherTabbedPage());
 
             }
         }

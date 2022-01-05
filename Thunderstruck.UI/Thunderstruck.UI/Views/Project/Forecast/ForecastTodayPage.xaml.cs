@@ -21,7 +21,8 @@ namespace Thunderstruck.UI.Views.Project.Forecast
         public ForecastTodayPage()
         {
             InitializeComponent();
-            BindingContext = new ForecastTodayViewModel();
+            // BindingContext = new ForecastTodayViewModel();
+            (BindingContext as ForecastTodayViewModel)?.GetCurrentLocationCommand.Execute("");
         }
         private async void BtnToday_OnClicked(object sender, EventArgs e)
         { 
@@ -31,14 +32,6 @@ namespace Thunderstruck.UI.Views.Project.Forecast
             {
                 await Application.Current.MainPage.DisplayAlert("Alert", "Please enter a valid location and try again.", "Ok");
             }
-        }
-
-        protected override void OnDisappearing()
-        {
-            var cts = (BindingContext as ForecastTodayViewModel).Cts;
-            if (cts != null && !cts.IsCancellationRequested)
-                cts.Cancel();
-            base.OnDisappearing();
         }
 
     }

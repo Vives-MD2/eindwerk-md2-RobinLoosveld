@@ -12,6 +12,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OAuth.Claims;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using NetTopologySuite;
+using NetTopologySuite.Geometries;
+using NetTopologySuite.IO.Converters;
 using Newtonsoft.Json;
 using KestrelServerOptionsSystemdExtensions = Microsoft.AspNetCore.Hosting.KestrelServerOptionsSystemdExtensions;
 
@@ -29,7 +33,18 @@ namespace Thunderstruck.RestApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddControllers();
+            // source: https://github.com/NetTopologySuite/NetTopologySuite.IO.GeoJSON/wiki/Using-NTS.IO.GeoJSON4STJ-with-ASP.NET-Core-MVC
+            services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    var geoJsonConverterFactory = new GeoJsonConverterFactory();
+                    options.JsonSerializerOptions.Converters.Add(geoJsonConverterFactory);
+                });
+            services.AddControllers(options =>
+                    options.ModelMetadataDetailsProviders.Add(new SuppressChildValidationMetadataProvider(typeof(Point))));
+
+            services.AddSingleton(NtsGeometryServices.Instance);
+
             services.AddMvc()
                 .AddMvcOptions(options => { options.EnableEndpointRouting = false; })
                 .AddNewtonsoftJson(options =>
@@ -54,7 +69,7 @@ namespace Thunderstruck.RestApi
                     options.Scope.Add("user-read-currently-playing");
                     options.Scope.Add("user-read-email");
                     options.Scope.Add("app-remote-control");
-                    var test= options.Scope;
+                    var test = options.Scope;
                     //var end = options.AuthorizationEndpoint;
                     //options.AuthorizationEndpoint; //+= "&scope=user-read-private playlist-modify-private";
                 });
