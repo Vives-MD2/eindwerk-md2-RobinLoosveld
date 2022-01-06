@@ -64,7 +64,6 @@ namespace Thunderstruck.UI.ViewModels
 
         private async Task GetCurrentWeatherByLocationText()
         {
-            await GetCoordinatesByPlaceName("Kortrijk");
             var client = new HttpClient();
 
             var request = new HttpRequestMessage
@@ -103,11 +102,15 @@ namespace Thunderstruck.UI.ViewModels
             using (ApiService<ILocationDataApi> service =
                    new ApiService<ILocationDataApi>(GlobalVars.ThunderstruckApiOnline))
             {
+
                 var locationData = new LocationData
                     { Location = LocationDataHelper.ConvertLocationToPoint(CurrentPhoneLocation), TimeStamp = DateTime.Now };
+                //get placename etc to use in the db
+
+                var placemark = await LocationDataHelper.GetPlacemarkByCoordinates(CurrentPhoneLocation.Latitude, CurrentPhoneLocation.Longitude);
                 LocationDataWithDouble locationMapObject = new LocationDataWithDouble
                 {
-                    //LocationName = "Tranen",
+                    LocationName = placemark.Locality,
                     TimeStamp = locationData.TimeStamp,
                     XLongitude = locationData.Location.X,
                     YLatitude = locationData.Location.Y
@@ -116,7 +119,6 @@ namespace Thunderstruck.UI.ViewModels
                 var test = await service.myService.GetById(8);
                 //var convertedObject =  JsonConvert.DefaultSettings..DeserializeObject<ApiSingleResponse<LocationData>>(response)?.Value;
             }
-
         }
         private async Task<Location> GetCoordinatesByPlaceName(string placeName)
         {
