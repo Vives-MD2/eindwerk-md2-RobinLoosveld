@@ -14,7 +14,9 @@
                 HorizontalOptions="CenterAndExpand" />
 
             <Entry x:Name="eEnterLocation" Placeholder="Enter a location" Text="{Binding EnteredLocation}" />
-            <Button x:Name="btnToday" Text="Today" Clicked="BtnToday_OnClicked" VerticalOptions="CenterAndExpand" Command="{Binding GetCurrentWeatherCommand}" />
+            <Button x:Name="btnUseLocation" Text="Use This Location" Clicked="BtnUseThisLocation_OnClicked" VerticalOptions="CenterAndExpand" Command="{Binding GetCurrentWeatherCommand}" />
+            <Button x:Name="btnUpdateLocation" Text="Update Current Location"  Command="{Binding  GetCurrentLocationCommand}"/>
+            <Editor x:Name="eCurrentLocation" Text ="{Binding CurrentPhoneLocation.Latitude}" IsEnabled="false"/>
             <ListView x:Name="lstToday"/>
         </StackLayout>
     </ContentPage.Content>

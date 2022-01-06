@@ -21,10 +21,9 @@ namespace Thunderstruck.UI.Views.Project.Forecast
         public ForecastTodayPage()
         {
             InitializeComponent();
-            // BindingContext = new ForecastTodayViewModel();
-            (BindingContext as ForecastTodayViewModel)?.GetCurrentLocationCommand.Execute("");
+            BindingContext = new ForecastTodayViewModel();
         }
-        private async void BtnToday_OnClicked(object sender, EventArgs e)
+        private async void BtnUseThisLocation_OnClicked(object sender, EventArgs e)
         { 
             //get current weather
             // await GetCurrentWeatherByLocationText();
@@ -33,6 +32,5 @@ namespace Thunderstruck.UI.Views.Project.Forecast
                 await Application.Current.MainPage.DisplayAlert("Alert", "Please enter a valid location and try again.", "Ok");
             }
         }
-
     }
 }

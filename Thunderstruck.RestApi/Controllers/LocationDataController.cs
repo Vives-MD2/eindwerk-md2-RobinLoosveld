@@ -20,6 +20,7 @@ namespace Thunderstruck.RestApi.Controllers
         private readonly LocationDataManager _ldManager = new LocationDataManager();
        
         private readonly IOptions<JsonOptions> _jsonOptions;
+        //geolocation
         private readonly NtsGeometryServices _geometryServices = new NtsGeometryServices();
 
         [HttpGet("GetById")]
@@ -56,6 +57,10 @@ namespace Thunderstruck.RestApi.Controllers
         [HttpPost("Create")]
         public async Task<IActionResult> Create([FromBody] LocationDataWithDouble locationData)
         {
+            // (A spatial reference identifier (SRID) is a unique identifier associated with a specific coordinate system, tolerance, and resolution.)
+            // A Point datatype needs an SRID to work, the most common is 4326
+            // If this isn't included, the data will not be correctly added to the database or not be added at all.
+
             var factory =_geometryServices.CreateGeometryFactory(srid: 4326);
 
             try
@@ -86,30 +91,6 @@ namespace Thunderstruck.RestApi.Controllers
             {
                 return BadRequest(ex.Message);
             }
-            //var locationDataToConvert = new LocationData();
-            //try
-            //{
-            //    if (locationData is null)
-            //    {
-            //        //return user = new User()
-            //        //{
-            //        //    Tex = new ThunderstruckException("No user object found.", ExceptionTypes.Fatal)
-            //        //};
-            //        throw new NullReferenceException();
-            //    }
-            //    else
-            //    {
-
-            //    }
-        //}
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine(ex);
-        //        throw;
-        //    }
-
-        //        yield return result;
-            
         }
         //TODO: check if update is needed in project
         [HttpPut("Update")]

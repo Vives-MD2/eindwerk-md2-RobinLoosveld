@@ -52,8 +52,6 @@ namespace Thunderstruck.RestApi.Controllers
                 Request.HttpContext.Response.Redirect(url);
             }
         }
-
     }
-
 }
 

@@ -4,26 +4,20 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Newtonsoft.Json;
-using SpotifyAPI.Web;
 using Thunderstruck.DOMAIN.Models;
 using Thunderstruck.UI.Api;
 using Thunderstruck.UI.Api.Contracts;
 using Thunderstruck.UI.AppService;
-using Thunderstruck.UI.AppService.Contracts;
 using Thunderstruck.UI.Helpers;
 using Thunderstruck.UI.ResponseModels.UserModels;
-using Thunderstruck.UI.Views.Project;
 using Thunderstruck.UI.Views.Project.Forecast;
-using Thunderstruck.UI.Views.Project.UserInfo;
-using Thunderstruck.UI.Views.Root;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Thunderstruck.UI.ViewModels
 {
-    public class LoginViewModel : BaseViewModel, IDisposable
+    public class LoginViewModel : BaseViewModel
     {
         //private string _clientId = "f3fa527a095f46d0a1b70a344978a5d5";
         private string _authenticationUrl = "http://user21.vivesxamarin.com/xamarinauth/";
