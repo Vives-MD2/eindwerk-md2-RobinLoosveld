@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Thunderstruck.UI.ViewModels;
+using Thunderstruck.UI.ViewModels.Forecast;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

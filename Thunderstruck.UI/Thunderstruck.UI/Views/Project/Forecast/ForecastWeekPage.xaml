@@ -2,9 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:Thunderstruck.UI.ViewModels;assembly=Thunderstruck.UI"
+             xmlns:forecast="clr-namespace:Thunderstruck.UI.ViewModels.Forecast;assembly=Thunderstruck.UI"
              x:Class="Thunderstruck.UI.Views.Project.Forecast.ForecastWeekPage">
     <ContentPage.BindingContext>
-        <viewModels:ForecastWeekViewModel/>
+        <forecast:ForecastWeekViewModel/>
     </ContentPage.BindingContext>
 
     <ContentPage.Content>

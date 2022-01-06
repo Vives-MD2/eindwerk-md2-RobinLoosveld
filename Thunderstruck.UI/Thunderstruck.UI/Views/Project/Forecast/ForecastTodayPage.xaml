@@ -2,9 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:Thunderstruck.UI.ViewModels;assembly=Thunderstruck.UI"
+             xmlns:forecast="clr-namespace:Thunderstruck.UI.ViewModels.Forecast;assembly=Thunderstruck.UI"
              x:Class="Thunderstruck.UI.Views.Project.Forecast.ForecastTodayPage">
     <ContentPage.BindingContext>
-        <viewModels:ForecastTodayViewModel/>
+        <forecast:ForecastTodayViewModel/>
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
@@ -14,7 +15,7 @@
                 HorizontalOptions="CenterAndExpand" />
 
             <Entry x:Name="eEnterLocation" Placeholder="Enter a location" Text="{Binding EnteredLocation}" />
-            <Button x:Name="btnUseLocation" Text="Use This Location" Clicked="BtnUseThisLocation_OnClicked" VerticalOptions="CenterAndExpand" Command="{Binding GetCurrentWeatherCommand}" />
+            <Button x:Name="btnUseLocation" Text="Use This Location" VerticalOptions="CenterAndExpand" Command="{Binding GetCurrentWeatherCommand}" />
             <Button x:Name="btnUpdateLocation" Text="Update Current Location"  Command="{Binding  GetCurrentLocationCommand}"/>
             <Editor x:Name="eCurrentLocation" Text ="{Binding CurrentPhoneLocation.Latitude}" IsEnabled="false"/>
             <ListView x:Name="lstToday"/>

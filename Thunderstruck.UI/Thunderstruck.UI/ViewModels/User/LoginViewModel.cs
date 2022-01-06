@@ -5,7 +5,6 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Newtonsoft.Json;
-using Thunderstruck.DOMAIN.Models;
 using Thunderstruck.UI.Api;
 using Thunderstruck.UI.Api.Contracts;
 using Thunderstruck.UI.AppService;
@@ -15,7 +14,7 @@ using Thunderstruck.UI.Views.Project.Forecast;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
-namespace Thunderstruck.UI.ViewModels
+namespace Thunderstruck.UI.ViewModels.User
 {
     public class LoginViewModel : BaseViewModel
     {
@@ -137,7 +136,7 @@ namespace Thunderstruck.UI.ViewModels
             using (ApiService<IUserApi> service = new ApiService<IUserApi>(GlobalVars.ThunderstruckApiOnline))
             {
                 var response = await service.myService.GetByEmail(CurrentUser.email);
-                var emailInDbUser = JsonConvert.DeserializeObject<ApiSingleResponse<User>>(response).Value;
+                var emailInDbUser = JsonConvert.DeserializeObject<ApiSingleResponse<DOMAIN.Models.User>>(response).Value;
 
                 //do not create db user of there're already one with the same email
                 if (CurrentUser.email != emailInDbUser.Email)

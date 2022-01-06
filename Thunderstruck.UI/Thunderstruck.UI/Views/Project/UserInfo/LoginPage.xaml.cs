@@ -1,4 +1,5 @@
 ﻿using Thunderstruck.UI.ViewModels;
+using Thunderstruck.UI.ViewModels.User;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

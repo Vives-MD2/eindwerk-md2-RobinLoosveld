@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Xamarin.Essentials;
 
-namespace Thunderstruck.UI.ViewModels
+namespace Thunderstruck.UI.ViewModels.User
 {
     public class UserProfileViewModel:BaseViewModel
     {

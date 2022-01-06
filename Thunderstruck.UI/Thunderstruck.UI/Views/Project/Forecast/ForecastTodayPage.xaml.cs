@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Query.Internal;
 using Refit;
 using Thunderstruck.UI.ViewModels;
+using Thunderstruck.UI.ViewModels.Forecast;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -22,15 +23,6 @@ namespace Thunderstruck.UI.Views.Project.Forecast
         {
             InitializeComponent();
             BindingContext = new ForecastTodayViewModel();
-        }
-        private async void BtnUseThisLocation_OnClicked(object sender, EventArgs e)
-        { 
-            //get current weather
-            // await GetCurrentWeatherByLocationText();
-            if (eEnterLocation.Text is null)
-            {
-                await Application.Current.MainPage.DisplayAlert("Alert", "Please enter a valid location and try again.", "Ok");
-            }
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Thunderstruck.UI.ViewModels
+﻿namespace Thunderstruck.UI.ViewModels.Forecast
 {
     public class ForecastTomorrowViewModel:BaseViewModel
     {

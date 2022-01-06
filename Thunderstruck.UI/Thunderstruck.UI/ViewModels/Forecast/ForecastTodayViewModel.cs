@@ -15,7 +15,7 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 using JsonSerializer = Utf8Json.JsonSerializer;
 
-namespace Thunderstruck.UI.ViewModels
+namespace Thunderstruck.UI.ViewModels.Forecast
 {
     public class ForecastTodayViewModel : BaseViewModel //GeoJsonConverterFactory
     {

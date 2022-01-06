@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Thunderstruck.DOMAIN.Models;
 using Thunderstruck.UI.ViewModels;
+using Thunderstruck.UI.ViewModels.User;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;

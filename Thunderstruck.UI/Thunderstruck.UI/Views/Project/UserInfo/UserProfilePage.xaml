@@ -2,9 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:Thunderstruck.UI.ViewModels;assembly=Thunderstruck.UI"
+             xmlns:user="clr-namespace:Thunderstruck.UI.ViewModels.User;assembly=Thunderstruck.UI"
              x:Class="Thunderstruck.UI.Views.Project.UserInfo.UserProfilePage">
     <ContentPage.BindingContext>
-        <viewModels:UserProfileViewModel/>
+        <user:UserProfileViewModel/>
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
