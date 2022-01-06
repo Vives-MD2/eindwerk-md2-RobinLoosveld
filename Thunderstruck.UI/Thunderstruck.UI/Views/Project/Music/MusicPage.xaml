@@ -5,7 +5,7 @@
   <!--Pages can be added as references or inline-->
 
     <ContentPage Title="Playlist" >
-        <Label x:Name="lblUser"/>
+        <Label x:Name="lblUser" Text="Coming soon!"/>
     </ContentPage>
   <ContentPage Title="Preferences" />
 

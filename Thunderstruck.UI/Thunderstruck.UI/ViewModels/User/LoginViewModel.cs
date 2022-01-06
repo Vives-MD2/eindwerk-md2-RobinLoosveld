@@ -125,37 +125,36 @@ namespace Thunderstruck.UI.ViewModels.User
             using (var json = new JsonTextReader(reader))
             {
                 CurrentUser = _serializer.Deserialize<SpotifyUserRootModel>(json);
-                if (await SecureStorage.GetAsync("CurrentUserUsername") != CurrentUser.display_name)
+                if (await SecureStorage.GetAsync("CurrentUserUsername") != CurrentUser?.display_name)
                 {
                     SecureStorage.Remove("CurrentUserUsername");
-                    await SecureStorage.SetAsync("CurrentUserUsername", CurrentUser.display_name);
+                    await SecureStorage.SetAsync("CurrentUserUsername", CurrentUser?.display_name);
                 }
-                if (await SecureStorage.GetAsync("CurrentUserEmail") != CurrentUser.email)
+                if (await SecureStorage.GetAsync("CurrentUserEmail") != CurrentUser?.email)
                 {
                     SecureStorage.Remove("CurrentUserEmail");
-                    await SecureStorage.SetAsync("CurrentUserEmail", CurrentUser.email);
+                    await SecureStorage.SetAsync("CurrentUserEmail", CurrentUser?.email);
                 }
 
                 await SecureStorage.SetAsync("UserToken", authToken);
                 //Not the best way to save auth token and check if authtoken has expired instead try implementing refresh token
-                await App.Current.MainPage.DisplayAlert("It Worked?", CurrentUser.email + CurrentUser.id, "Ok");
+                //await App.Current.MainPage.DisplayAlert("It Worked?", CurrentUser?.email + CurrentUser?.id, "Ok");
             }
             //use the spotifyuser info to add a user to the db
             using (ApiService<IUserApi> service = new ApiService<IUserApi>(GlobalVars.ThunderstruckApiOnline))
             {
-                var response = await service.myService.GetByEmail(CurrentUser.email);
-                var emailInDbUser = JsonConvert.DeserializeObject<ApiSingleResponse<DOMAIN.Models.User>>(response).Value;
+                var response = await service.myService.GetByEmail(CurrentUser?.email);
+                var emailInDbUser = JsonConvert.DeserializeObject<ApiSingleResponse<DOMAIN.Models.User>>(response)?.Value;
 
                 //do not create db user of there're already one with the same email
-                if (CurrentUser.email != emailInDbUser.Email)
+                if (CurrentUser?.email != emailInDbUser?.Email)
                 {
                     var dbUser = await UserHelper.MapSpotifyUserToDbUser(CurrentUser);
                     await service.myService.Create(dbUser);
                 }
 
                 //create new stack
-                await _pageService.PushModelAsync(new WeatherTabbedPage());
-
+                await _pageService.PushAsync(new WeatherTabbedPage());
             }
         }
 

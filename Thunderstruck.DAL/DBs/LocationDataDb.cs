@@ -22,7 +22,7 @@ namespace Thunderstruck.DAL.DBs
         public async Task<IEnumerable<LocationData>> GetAsync(int skip, int take)
         {
             return await _context.LocationData.AsNoTracking()
-                .OrderBy(x => x.Id)
+                .OrderByDescending(x => x.Id)
                 .Skip(skip).Take(take)
                 .ToListAsync();
         }

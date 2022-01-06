@@ -9,10 +9,12 @@
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="{Binding Username }"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Padding="20">
+            <Label Text="Current user: " FontSize="Title"/>
+                <Label Text="{Binding Username }"
+                   HorizontalOptions="StartAndExpand" />
+            <Label Text="{Binding Email }"
+                   HorizontalOptions="StartAndExpand" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

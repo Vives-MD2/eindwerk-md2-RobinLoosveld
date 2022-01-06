@@ -19,8 +19,7 @@ namespace Thunderstruck.UI.Views.Project.UserInfo
         public UserProfilePage(User user)
         {
             InitializeComponent();
-            BindingContext = new UserProfileViewModel();
-            
+            (BindingContext as UserProfileViewModel)?.ShowUserInfoCommand.Execute(null);
         }
     }
 }
