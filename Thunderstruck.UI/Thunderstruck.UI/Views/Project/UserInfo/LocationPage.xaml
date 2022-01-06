@@ -1,12 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:generic="clr-namespace:System.Collections.Generic;assembly=netstandard"
+             xmlns:forecast="clr-namespace:Thunderstruck.UI.ViewModels.Forecast;assembly=Thunderstruck.UI"
+             xmlns:user="clr-namespace:Thunderstruck.UI.ViewModels.User;assembly=Thunderstruck.UI"
              x:Class="Thunderstruck.UI.Views.Project.UserInfo.LocationPage">
+    <ContentPage.BindingContext>
+        <user:LocationViewModel/>
+    </ContentPage.BindingContext>
+
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
+            <Label Text="Locations"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
+            <ListView x:Name="lstLocations" ItemsSource="{Binding Locations }">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <Label>
+                                    <Label.Text>
+                                        <MultiBinding StringFormat="{}{0} {1} {2}">
+                                            <Binding Path="LocationName"/>
+                                            <Binding Path="XLongitude" />
+                                            <Binding Path="YLatitude"/>
+                                        </MultiBinding>
+                                    </Label.Text>
+                                </Label>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

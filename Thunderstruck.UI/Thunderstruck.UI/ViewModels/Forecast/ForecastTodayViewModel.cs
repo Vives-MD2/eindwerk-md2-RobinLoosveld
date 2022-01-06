@@ -64,6 +64,11 @@ namespace Thunderstruck.UI.ViewModels.Forecast
 
         private async Task GetCurrentWeatherByLocationText()
         {
+            //use the entered location to create a datalocation object
+            var textLocation = await GetCoordinatesByPlaceName(EnteredLocation);
+            var textLocationData = new LocationData();
+
+            //use newly made LocationData object to get the current weather
             if (!string.IsNullOrWhiteSpace(EnteredLocation))
             {
                 var client = new HttpClient();
@@ -97,7 +102,6 @@ namespace Thunderstruck.UI.ViewModels.Forecast
                     }
                 }
             }
-           
         }
 
         private async Task GetCurrentLocation()
@@ -121,7 +125,6 @@ namespace Thunderstruck.UI.ViewModels.Forecast
                 };
                 var response = await service.myService.Create(locationMapObject);
                 var test = await service.myService.GetById(8);
-                //var convertedObject =  JsonConvert.DefaultSettings..DeserializeObject<ApiSingleResponse<LocationData>>(response)?.Value;
             }
         }
         private async Task<Location> GetCoordinatesByPlaceName(string placeName)

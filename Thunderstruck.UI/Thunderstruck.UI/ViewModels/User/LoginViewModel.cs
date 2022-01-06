@@ -125,9 +125,17 @@ namespace Thunderstruck.UI.ViewModels.User
             using (var json = new JsonTextReader(reader))
             {
                 CurrentUser = _serializer.Deserialize<SpotifyUserRootModel>(json);
-                await SecureStorage.SetAsync("CurrentUserUsername", CurrentUser.display_name);
-                await SecureStorage.SetAsync("CurrentUserEmail", CurrentUser.email);
-               
+                if (await SecureStorage.GetAsync("CurrentUserUsername") != CurrentUser.display_name)
+                {
+                    SecureStorage.Remove("CurrentUserUsername");
+                    await SecureStorage.SetAsync("CurrentUserUsername", CurrentUser.display_name);
+                }
+                if (await SecureStorage.GetAsync("CurrentUserEmail") != CurrentUser.email)
+                {
+                    SecureStorage.Remove("CurrentUserEmail");
+                    await SecureStorage.SetAsync("CurrentUserEmail", CurrentUser.email);
+                }
+
                 await SecureStorage.SetAsync("UserToken", authToken);
                 //Not the best way to save auth token and check if authtoken has expired instead try implementing refresh token
                 await App.Current.MainPage.DisplayAlert("It Worked?", CurrentUser.email + CurrentUser.id, "Ok");
@@ -151,9 +159,5 @@ namespace Thunderstruck.UI.ViewModels.User
             }
         }
 
-        public void Dispose()
-        {
-
-        }
     }
 }

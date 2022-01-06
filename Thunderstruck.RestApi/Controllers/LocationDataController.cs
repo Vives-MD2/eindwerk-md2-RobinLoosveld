@@ -10,6 +10,7 @@ using NetTopologySuite.IO.Converters;
 using Thunderstruck.BLL.Managers;
 using Thunderstruck.DOMAIN.Models;
 using Thunderstruck.UI.ResponseModels.WeatherModels;
+using Xamarin.Forms;
 
 namespace Thunderstruck.RestApi.Controllers
 {
@@ -39,15 +40,33 @@ namespace Thunderstruck.RestApi.Controllers
         [HttpGet("Get")]
         public async Task<IActionResult> Get([FromQuery(Name = "skip")] int skip, [FromQuery(Name = "take")] int take)
         {
+            // step 1: Get IEnumerable<LocationData> from db
+            // step 3: create new object to map
+            //          -> var point = factory.CreatePoint(new Coordinate(locationData.XLongitude, locationData.YLatitude));
+            //          -> Location = point
+            // step 4: return mapped object to db
             try
             {
                 if (take == 0)
                 {
                     take = 1;
                 }
-
                 IEnumerable<LocationData> dbLocationsData = await _ldManager.GetAsync(skip, take);
-                return Ok(new JsonResult(dbLocationsData));
+                List<LocationDataWithDouble> mappedLocations = new List<LocationDataWithDouble>();
+                foreach (var location in dbLocationsData)
+                {
+                    var mappedLocation = new LocationDataWithDouble()
+                    {
+                        LocationName = location.LocationName,
+                        TimeStamp = location.TimeStamp,
+                        XLongitude = location.Location.X,
+                        YLatitude = location.Location.Y
+                    };
+
+                    mappedLocations.Add(mappedLocation);
+                }
+                
+                return Ok(new JsonResult(mappedLocations));
             }
             catch (Exception ex)
             {
@@ -61,6 +80,12 @@ namespace Thunderstruck.RestApi.Controllers
             // A Point datatype needs an SRID to work, the most common is 4326
             // If this isn't included, the data will not be correctly added to the database or not be added at all.
 
+            // step 1: Get locationdatawith from UI (parameter)
+            // step 2: add srid to factory
+            // step 3: create new object to map
+            //          -> var point = factory.CreatePoint(new Coordinate(locationData.XLongitude, locationData.YLatitude));
+            //          -> Location = point
+            // step 4: return mapped object to db
             var factory =_geometryServices.CreateGeometryFactory(srid: 4326);
 
             try

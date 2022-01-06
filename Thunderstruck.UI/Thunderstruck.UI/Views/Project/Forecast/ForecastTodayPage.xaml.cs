@@ -18,11 +18,11 @@ namespace Thunderstruck.UI.Views.Project.Forecast
 
     public partial class ForecastTodayPage : ContentPage
     {
-
         public ForecastTodayPage()
         {
             InitializeComponent();
             BindingContext = new ForecastTodayViewModel();
         }
+        
     }
 }
