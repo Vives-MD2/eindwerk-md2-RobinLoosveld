@@ -8,16 +8,25 @@ namespace Thunderstruck.UI.Views.Project.Forecast
     {
         public WeatherTabbedPage()
         {
-            //add icons to pages
-            //
-            var forcastTodayPage = new ForecastTodayPage();
-            forcastTodayPage.IconImageSource = "calendar.svg";
-            forcastTodayPage.Title = "Today";
 
             InitializeComponent();
-            this.Children.Add(new ForecastTodayPage(){Title="Today"});
-            this.Children.Add(new ForecastTomorrowPage(){Title="Tomorrow"});
-            this.Children.Add(new ForecastWeekPage(){Title="Next 5 Days"});
+            //add icons to pages
+            //
+            var forecastTodayPage = new ForecastTodayPage();
+            forecastTodayPage.IconImageSource = "forecast_today.png";
+            forecastTodayPage.Title = "Today";
+
+            var forecastTomorrowPage = new ForecastTomorrowPage();
+            forecastTomorrowPage.IconImageSource = "forecast_tomorrow.png";
+            forecastTomorrowPage.Title = "Tomorrow";
+
+            var forecastWeekPage = new ForecastWeekPage();
+            forecastWeekPage.IconImageSource = "forecast_week.png";
+            forecastWeekPage.Title = "Next 5 days";
+
+            this.Children.Add(forecastTodayPage);
+            this.Children.Add(forecastTomorrowPage);
+            this.Children.Add(forecastWeekPage);
         }
     }
 }

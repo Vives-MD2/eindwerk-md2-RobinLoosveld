@@ -11,6 +11,7 @@ namespace Thunderstruck.UI.Views.Project.UserInfo
         {
             InitializeComponent();
             this.Children.Add(new UserProfilePage(new User()) { Title = "Profile" });
+            this.Children.Add(new LocationPage(){Title = "Past Locations"});
             this.Children.Add(new AchievementPage() {Title = "Achievements"});
         }
     }

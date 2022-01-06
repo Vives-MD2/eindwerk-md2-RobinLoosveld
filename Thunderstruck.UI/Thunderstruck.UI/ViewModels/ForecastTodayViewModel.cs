@@ -64,36 +64,40 @@ namespace Thunderstruck.UI.ViewModels
 
         private async Task GetCurrentWeatherByLocationText()
         {
-            var client = new HttpClient();
+            if (!string.IsNullOrWhiteSpace(EnteredLocation))
+            {
+                var client = new HttpClient();
 
-            var request = new HttpRequestMessage
-            {
-                Method = HttpMethod.Get,
-                RequestUri =
-                    new Uri($"https://community-open-weather-map.p.rapidapi.com/weather?q={EnteredLocation}&units=metric"),
-                Headers =
+                var request = new HttpRequestMessage
                 {
-                    { "x-rapidapi-host", "community-open-weather-map.p.rapidapi.com" },
-                    { "x-rapidapi-key", "849c053122mshb66d0696c8175cbp14f39djsn5849b90c83d1" },
-                },
-            };
-            using (var response = await client.SendAsync(request))
-            {
-                try
+                    Method = HttpMethod.Get,
+                    RequestUri =
+                        new Uri($"https://community-open-weather-map.p.rapidapi.com/weather?q={EnteredLocation}&units=metric"),
+                    Headers =
+                    {
+                        { "x-rapidapi-host", "community-open-weather-map.p.rapidapi.com" },
+                        { "x-rapidapi-key", "849c053122mshb66d0696c8175cbp14f39djsn5849b90c83d1" },
+                    },
+                };
+                using (var response = await client.SendAsync(request))
                 {
-                    //create model for deserialization
-                    //AutoConvert json to classes: Visual Studio -> Edit -> Paste Special -> "Paste JSON as Classes"
-                    response.EnsureSuccessStatusCode();
-                    var stream = await response.Content.ReadAsStreamAsync();
-                    var result = await JsonSerializer.DeserializeAsync<CurrentWeatherModelRoot>(stream);
-                    await Application.Current.MainPage.DisplayAlert("Alert", result.name + result.coord.lat, "Ok");
-                }
-                catch (JsonParsingException ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    throw;
+                    try
+                    {
+                        //create model for deserialization
+                        //AutoConvert json to classes: Visual Studio -> Edit -> Paste Special -> "Paste JSON as Classes"
+                        response.EnsureSuccessStatusCode();
+                        var stream = await response.Content.ReadAsStreamAsync();
+                        var result = await JsonSerializer.DeserializeAsync<CurrentWeatherModelRoot>(stream);
+                        await Application.Current.MainPage.DisplayAlert("Alert", result.name + result.coord.lat, "Ok");
+                    }
+                    catch (JsonParsingException ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                        throw;
+                    }
                 }
             }
+           
         }
 
         private async Task GetCurrentLocation()
