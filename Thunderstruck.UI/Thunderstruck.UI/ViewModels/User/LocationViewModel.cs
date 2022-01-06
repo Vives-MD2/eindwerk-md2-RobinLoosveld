@@ -23,17 +23,19 @@ namespace Thunderstruck.UI.ViewModels.User
     public class LocationViewModel : BaseViewModel
     {
         private PageService pageService = new PageService();
+
         private ObservableCollection<LocationDataWithDouble> _locations;
 
         public ObservableCollection<LocationDataWithDouble> Locations
         {
             get => _locations;
-            set
-            {
-                if (value == _locations) return;
-                _locations = value;
-                OnPropertyChanged();
-            }
+            set => SetValue(ref _locations, value);
+            //set
+            //{
+            //    if (value == _locations) return;
+            //    _locations = value;
+            //    OnPropertyChanged();
+            //}
         }
         // Commands
         public ICommand GetAllLocationsCommand { get; set; }
@@ -41,6 +43,7 @@ namespace Thunderstruck.UI.ViewModels.User
         public LocationViewModel()
         {
             _locations = new ObservableCollection<LocationDataWithDouble>();
+           
             GetAllLocationsCommand = new Command<GetParam>(async x => await GetAllLocations(x));
         }
 
@@ -51,8 +54,7 @@ namespace Thunderstruck.UI.ViewModels.User
                 using (ApiService<ILocationDataApi> service =
                        new ApiService<ILocationDataApi>(GlobalVars.ThunderstruckApiOnline))
                 {
-                    var response = await service.myService.Get(x.skip, x.take);
-                    var test = "hi";
+                    var response = await service.myService.Get(skip: x.skip, take:x.take);
                     IEnumerable<LocationDataWithDouble> locations =
                         JsonConvert.DeserializeObject<ApiMultiResponse<LocationDataWithDouble>>(response)?.Value;
 
@@ -68,5 +70,6 @@ namespace Thunderstruck.UI.ViewModels.User
             }
         }
     }
+
 }
 

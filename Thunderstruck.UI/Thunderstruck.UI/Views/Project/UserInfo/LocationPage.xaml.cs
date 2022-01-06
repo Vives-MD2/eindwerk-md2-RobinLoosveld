@@ -16,9 +16,29 @@ namespace Thunderstruck.UI.Views.Project.UserInfo
         public LocationPage()
         {
             InitializeComponent();
-            _skipTake = new GetParam() { skip = 0, take = 10 };
+
+            _skipTake = new GetParam() { skip = 0, take = 50 };
+            GetLocations();
+            //(BindingContext as LocationViewModel).PreviousLocationsCommand.Execute(_skipTake);
+            //(BindingContext as LocationViewModel).NextLocationsCommand.Execute(_skipTake);
+        }
+
+        private void GetLocations()
+        {
             (BindingContext as LocationViewModel).GetAllLocationsCommand.Execute(_skipTake);
-            
+        }
+        private void BtnPrevLocs_OnClicked(object sender, EventArgs e)
+        {   
+
+            _skipTake.skip -= _skipTake.take;
+            _skipTake.skip = _skipTake.skip < 0 ? 0 : _skipTake.skip;
+            GetLocations();
+        }
+
+        private void BtnNextLocs_OnClicked(object sender, EventArgs e)
+        {
+            _skipTake.skip += _skipTake.take;
+            GetLocations();
         }
     }
 }

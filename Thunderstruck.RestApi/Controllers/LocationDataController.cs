@@ -47,11 +47,10 @@ namespace Thunderstruck.RestApi.Controllers
             // step 4: return mapped object to db
             try
             {
-                if (take == 0)
-                {
-                    take = 1;
-                }
+                if (take == 0)take = 1;
+                
                 IEnumerable<LocationData> dbLocationsData = await _ldManager.GetAsync(skip, take);
+               
                 List<LocationDataWithDouble> mappedLocations = new List<LocationDataWithDouble>();
                 foreach (var location in dbLocationsData)
                 {
