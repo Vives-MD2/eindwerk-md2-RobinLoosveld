@@ -21,7 +21,7 @@
             <Label TextColor="White" FontFamily="sans-serif" FontAttributes="Bold" FontSize="40"  x:Name="lblLogin"  Text="THUNDERSTRUCK" HorizontalOptions="CenterAndExpand"/>
         </StackLayout>
             <StackLayout Grid.Row="1" Padding="10" VerticalOptions="End">
-            <Label HorizontalOptions="Center" Text="Connect with" TextColor="White" FontSize="Title"/> 
+            <Label HorizontalOptions="Center" Text="Click to connect" TextColor="{StaticResource Key=primary-text}" FontSize="Title"/> 
             <ImageButton x:Name="btnLogin" Scale="0.75" CornerRadius="15" BackgroundColor="#F205702B" Source="Spotify_Logo_CMYK_White.png" Command="{Binding LoginSpotifyCommand}"/>
         </StackLayout>
     </Grid>

@@ -9,6 +9,7 @@
                 <Color x:Key="primary-theme">#1DB954</Color>
             <Color x:Key="secondary-theme">#000000</Color>
             <Color x:Key="primary-text">#FFFFFF</Color>
+            <Color x:Key="secondary-text">#1DB954</Color>
 
 
             <!--Styles-->

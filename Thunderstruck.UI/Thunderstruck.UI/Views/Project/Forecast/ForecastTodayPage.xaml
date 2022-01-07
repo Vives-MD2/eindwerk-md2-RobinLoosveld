@@ -40,8 +40,8 @@
         </Editor>
 
         <Label BackgroundColor="#4CBBBBBB" Grid.Row="5"  Grid.Column="0" Grid.ColumnSpan="2" FontSize="Title" FontAttributes="Bold" TextColor="White" Text="FORECAST" HorizontalOptions="Center"/>
-       
-        <ScrollView Margin="20" Padding="10" BackgroundColor="#7FBBBBBB" Grid.Row="6" Grid.ColumnSpan="2" >
+
+        <ScrollView Margin="20" Padding="10" BackgroundColor="#7F242424" Grid.Row="6" Grid.ColumnSpan="2" >
             <StackLayout Orientation="Horizontal">
                 <StackLayout>
                     <Label TextColor="White" Text="Current weather in:"/>
