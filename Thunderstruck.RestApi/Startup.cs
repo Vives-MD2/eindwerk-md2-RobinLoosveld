@@ -33,18 +33,6 @@ namespace Thunderstruck.RestApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // source: https://github.com/NetTopologySuite/NetTopologySuite.IO.GeoJSON/wiki/Using-NTS.IO.GeoJSON4STJ-with-ASP.NET-Core-MVC
-            services.AddControllers()
-                .AddJsonOptions(options =>
-                {
-                    var geoJsonConverterFactory = new GeoJsonConverterFactory();
-                    options.JsonSerializerOptions.Converters.Add(geoJsonConverterFactory);
-                });
-            services.AddControllers(options =>
-                    options.ModelMetadataDetailsProviders.Add(new SuppressChildValidationMetadataProvider(typeof(Point))));
-
-            services.AddSingleton(NtsGeometryServices.Instance);
-
             services.AddMvc()
                 .AddMvcOptions(options => { options.EnableEndpointRouting = false; })
                 .AddNewtonsoftJson(options =>
@@ -62,17 +50,28 @@ namespace Thunderstruck.RestApi
                     options.ClientId = "f3fa527a095f46d0a1b70a344978a5d5";
                     options.ClientSecret = "6e31e86358e843b69cd07ff15139376a";
                     options.SaveTokens = true;
-                    options.CallbackPath = "/callback";
-                    //scopes
                     options.Scope.Add("playlist-modify-private");
                     options.Scope.Add("playlist-modify-public");
                     options.Scope.Add("user-read-currently-playing");
                     options.Scope.Add("user-read-email");
                     options.Scope.Add("app-remote-control");
-                    var test = options.Scope;
+                    options.CallbackPath = "/callback";
+                    //scopes
                     //var end = options.AuthorizationEndpoint;
                     //options.AuthorizationEndpoint; //+= "&scope=user-read-private playlist-modify-private";
                 });
+           
+            // source: https://github.com/NetTopologySuite/NetTopologySuite.IO.GeoJSON/wiki/Using-NTS.IO.GeoJSON4STJ-with-ASP.NET-Core-MVC
+            services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    var geoJsonConverterFactory = new GeoJsonConverterFactory();
+                    options.JsonSerializerOptions.Converters.Add(geoJsonConverterFactory);
+                });
+            services.AddControllers(options =>
+                options.ModelMetadataDetailsProviders.Add(new SuppressChildValidationMetadataProvider(typeof(Point))));
+
+            services.AddSingleton(NtsGeometryServices.Instance);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -21,6 +21,8 @@ namespace Thunderstruck.UI.ViewModels.User
     {
         //private string _clientId = "f3fa527a095f46d0a1b70a344978a5d5";
         private string _authenticationUrl = "http://user21.vivesxamarin.com/xamarinauth/";
+        //private string _authenticationUrl = "https://192.168.0.183:5001/xamarinauth/";
+
 
         private JsonSerializer _serializer = new JsonSerializer();
         private PageService _pageService = new PageService();
@@ -94,14 +96,14 @@ namespace Thunderstruck.UI.ViewModels.User
                 }
 
                 AuthToken = r?.AccessToken ?? r?.IdToken;
-                var refreshToken = r.RefreshToken;
-                var timestamp = r.Timestamp;
+                //var refreshToken = r.RefreshToken;
+                //var timestamp = r.Timestamp;
 
-                //check if token had expired
-                if (await UserHelper.CheckIfTokenHasExpired(timestamp, AuthToken))
-                {
-                    await App.Current.MainPage.DisplayAlert("Alert", "Access token has expired", "ok");
-                }
+                ////check if token had expired
+                //if (await UserHelper.CheckIfTokenHasExpired(timestamp, AuthToken))
+                //{
+                //    await App.Current.MainPage.DisplayAlert("Alert", "Access token has expired", "ok");
+                //}
 
                 GetUserInfoUsingToken(AuthToken);
             }
@@ -151,7 +153,7 @@ namespace Thunderstruck.UI.ViewModels.User
                     await service.myService.Create(dbUser);
                 }
                 //Navigate to Tabbed user page
-               await App.Current.MainPage.DisplayAlert("Logged in", $"Welcome,{emailInDbUser?.Username}!", "Onward to glory");
+               await App.Current.MainPage.DisplayAlert("Logged in", $"Welcome, {emailInDbUser?.Username}!", "Onward to glory");
                await _pageService.PushAsync(new UserTabbedPage());
             }
         }
