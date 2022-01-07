@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:Thunderstruck.UI.ViewModels;assembly=Thunderstruck.UI"
              xmlns:forecast="clr-namespace:Thunderstruck.UI.ViewModels.Forecast;assembly=Thunderstruck.UI"
-             x:Class="Thunderstruck.UI.Views.Project.Forecast.ForecastTodayPage">
+             x:Class="Thunderstruck.UI.Views.Project.Forecast.ForecastTodayPage"
+             BackgroundImageSource="backgroundtodat_tombarrett_2t60_JYQ5pk_unsplash.jpg">
     <ContentPage.BindingContext>
         <forecast:ForecastTodayViewModel/>
     </ContentPage.BindingContext>
@@ -14,9 +15,9 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="200"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="300"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -24,8 +25,8 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Label Margin="20,0" Grid.Row="0" Grid.ColumnSpan="2" Text="LOCATION" BackgroundColor="Aqua" HorizontalOptions="Center" VerticalOptions="Center"/>
-        <Entry Margin="20,0" Grid.Row="1" Grid.ColumnSpan="2" x:Name="eEnterLocation" Placeholder="Enter a location" Text="{Binding EnteredLocation}" />
+        <Label Margin="20,0" Grid.Row="0" Grid.ColumnSpan="2" FontSize="Title" FontAttributes="Bold"  Text="LOCATION" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
+        <Entry Margin="20,0" Grid.Row="1" Grid.ColumnSpan="2" x:Name="eEnterLocation" BackgroundColor="#7FBBBBBB" TextColor="White" Placeholder="Enter a location" Text="{Binding EnteredLocation}" />
         <Button Grid.Row="2" Grid.ColumnSpan="2" x:Name="btnUseLocation" Text="Get Forecast for this location" Margin="50,0,50,0"  VerticalOptions="Center" Command="{Binding GetCurrentWeatherCommand}" />
         <Button Grid.Row="3" Grid.ColumnSpan="2" x:Name="btnUpdateLocation" Text="Update Current Location by gps"  Margin="50,0,50,0" Command="{Binding  GetCurrentLocationCommand}"/>
         <Editor Margin="20,0" Grid.Row="4" Grid.ColumnSpan="2" x:Name="eCurrentLocation" IsEnabled="false" Placeholder="Current GPS location will be visible here">
@@ -34,29 +35,27 @@
                     <Binding Path="PhoneLocationMappedObject.LocationName"/>
                     <Binding Path="PhoneLocationMappedObject.XLongitude"/>
                     <Binding Path="PhoneLocationMappedObject.YLatitude"/>
-
                 </MultiBinding>
             </Editor.Text>
         </Editor>
 
-        <Label BackgroundColor="Chartreuse" Grid.Row="5"  Grid.Column="0" Grid.ColumnSpan="2" Text="FORECAST" HorizontalOptions="Center"/>
+        <Label BackgroundColor="#4CBBBBBB" Grid.Row="5"  Grid.Column="0" Grid.ColumnSpan="2" FontSize="Title" FontAttributes="Bold" TextColor="White" Text="FORECAST" HorizontalOptions="Center"/>
        
-        <ScrollView Margin="20" Padding="10" BackgroundColor="Aquamarine" Grid.Row="6" Grid.ColumnSpan="2" >
+        <ScrollView Margin="20" Padding="10" BackgroundColor="#7FBBBBBB" Grid.Row="6" Grid.ColumnSpan="2" >
             <StackLayout Orientation="Horizontal">
                 <StackLayout>
-                    <Label Text="Current weather in:"/>
-                    <Label Text="Temperature: °c" />
-                    <Label Text="Temperature feels like: °c "/>
-                    <Label Text="Change of rain: %"/>
-                    <Label Text="Humidity: % "/>
-                    <Label Text="Pressure: hPa"/>
-                    <Label Text="Cloud cover: %"/>
-                    <Label Text="Wind: km/h"/>
-                    <Label Text="Visibility (meter):"/>
+                    <Label TextColor="White" Text="Current weather in:"/>
+                    <Label TextColor="White" Text="Temperature: °c" />
+                    <Label TextColor="White" Text="Temperature feels like: °c "/>
+                    <Label TextColor="White" Text="Humidity: % "/>
+                    <Label TextColor="White" Text="Pressure: hPa"/>
+                    <Label TextColor="White" Text="Cloud cover: %"/>
+                    <Label TextColor="White" Text="Wind: km/h"/>
+                    <Label TextColor="White" Text="Visibility (meter):"/>
                 </StackLayout>
 
                 <StackLayout BindingContext="{Binding CurrentWeather}">
-                    <Label>
+                    <Label TextColor="White">
                         <Label.Text>
                             <MultiBinding StringFormat="{} {0} {1}">
                                 <Binding Path="name"/>
@@ -64,14 +63,13 @@
                             </MultiBinding>
                         </Label.Text>
                     </Label>
-                    <Label  Text="{Binding main.temp}"/>
-                    <Label  Text="{Binding main.feels_like}"/>
-                    <Label  Text="{Binding rain._1h }"/>
-                    <Label  Text="{Binding main.humidity}"/>
-                    <Label  Text="{Binding main.pressure}"/>
-                    <Label  Text="{Binding clouds.all}"/>
-                    <Label Text="{Binding wind.speed}"/>
-                    <Label Text="{Binding visibility}"/>
+                    <Label TextColor="White"  Text="{Binding main.temp}"/>
+                    <Label TextColor="White"  Text="{Binding main.feels_like}"/>
+                    <Label TextColor="White"  Text="{Binding main.humidity}"/>
+                    <Label TextColor="White"  Text="{Binding main.pressure}"/>
+                    <Label TextColor="White" Text="{Binding clouds.all}"/>
+                    <Label TextColor="White" Text="{Binding wind.speed}"/>
+                    <Label TextColor="White" Text="{Binding visibility}"/>
 
                 </StackLayout>
             </StackLayout>

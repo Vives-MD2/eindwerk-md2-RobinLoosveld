@@ -110,5 +110,8 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\backgroundlogin.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\backgroundtodat_tombarrett_2t60_JYQ5pk_unsplash.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

@@ -104,7 +104,6 @@ namespace Thunderstruck.UI.ViewModels.User
                 }
 
                 GetUserInfoUsingToken(AuthToken);
-                //GetPublicPlaylists(AuthToken);
             }
             catch (Exception ex)
             {
@@ -151,8 +150,8 @@ namespace Thunderstruck.UI.ViewModels.User
                     var dbUser = await UserHelper.MapSpotifyUserToDbUser(CurrentUser);
                     await service.myService.Create(dbUser);
                 }
-
                 //Navigate to Tabbed user page
+               await App.Current.MainPage.DisplayAlert("Logged in", $"Welcome,{emailInDbUser?.Username}!", "Onward to glory");
                 await _pageService.PushAsync(new UserTabbedPage());
             }
         }

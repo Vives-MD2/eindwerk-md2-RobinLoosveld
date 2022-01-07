@@ -8,13 +8,31 @@
         <user:UserProfileViewModel/>
     </ContentPage.BindingContext>
 
-    <ContentPage.Content>
-        <StackLayout Padding="20">
-            <Label Text="Current user: " FontSize="Title"/>
-                <Label Text="{Binding Username }"
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <Label Grid.ColumnSpan="2" Grid.Row="0" Text="Current user" HorizontalOptions="Center" FontSize="Title"/>
+       
+        <StackLayout Grid.Column="0"  Grid.Row="1" Padding="20">
+            <Label Text="Spotify Username:"
+                   HorizontalOptions="StartAndExpand" />
+            <Label Text="Spotify Email: "
+                   HorizontalOptions="StartAndExpand" />
+        </StackLayout>
+        <StackLayout Grid.Column="1" Grid.Row="1" Padding="20">
+            <Label Text="{Binding Username }"
                    HorizontalOptions="StartAndExpand" />
             <Label Text="{Binding Email }"
                    HorizontalOptions="StartAndExpand" />
         </StackLayout>
-    </ContentPage.Content>
+
+    </Grid>
 </ContentPage>
