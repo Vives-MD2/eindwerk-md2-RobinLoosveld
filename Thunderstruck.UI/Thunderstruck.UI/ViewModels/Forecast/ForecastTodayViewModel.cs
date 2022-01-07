@@ -53,6 +53,18 @@ namespace Thunderstruck.UI.ViewModels.Forecast
             }
         }
 
+        private CurrentWeatherModelRoot _currentWeather;
+
+        public CurrentWeatherModelRoot CurrentWeather
+        {
+            get => _currentWeather;
+            set
+            {
+                if (value == _currentWeather) return;
+                _currentWeather = value;
+                OnPropertyChanged();
+            }
+        }
         public ICommand GetCurrentWeatherCommand { get; set; }
         public ICommand GetCurrentLocationCommand { get; set; }
 
@@ -92,8 +104,8 @@ namespace Thunderstruck.UI.ViewModels.Forecast
                         //AutoConvert json to classes: Visual Studio -> Edit -> Paste Special -> "Paste JSON as Classes"
                         response.EnsureSuccessStatusCode();
                         var stream = await response.Content.ReadAsStreamAsync();
-                        var result = await JsonSerializer.DeserializeAsync<CurrentWeatherModelRoot>(stream);
-                        await Application.Current.MainPage.DisplayAlert("Alert", result.name + result.coord.lat, "Ok");
+                        CurrentWeather = await JsonSerializer.DeserializeAsync<CurrentWeatherModelRoot>(stream);
+                        await Application.Current.MainPage.DisplayAlert("Alert", CurrentWeather.name + CurrentWeather.coord.lat, "Ok");
                     }
                     catch (JsonParsingException ex)
                     {

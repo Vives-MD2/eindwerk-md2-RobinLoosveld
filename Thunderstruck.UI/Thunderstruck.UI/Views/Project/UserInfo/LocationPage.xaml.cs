@@ -19,13 +19,11 @@ namespace Thunderstruck.UI.Views.Project.UserInfo
 
             _skipTake = new GetParam() { skip = 0, take = 50 };
             GetLocations();
-            //(BindingContext as LocationViewModel).PreviousLocationsCommand.Execute(_skipTake);
-            //(BindingContext as LocationViewModel).NextLocationsCommand.Execute(_skipTake);
         }
 
         private void GetLocations()
         {
-            (BindingContext as LocationViewModel).GetAllLocationsCommand.Execute(_skipTake);
+            (BindingContext as LocationViewModel)?.GetAllLocationsCommand.Execute(_skipTake);
         }
         private void BtnPrevLocs_OnClicked(object sender, EventArgs e)
         {   

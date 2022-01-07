@@ -8,17 +8,37 @@
         <forecast:ForecastTodayViewModel/>
     </ContentPage.BindingContext>
 
-    <ContentPage.Content>
-        <StackLayout>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackLayout Grid.Column="0" Grid.Row="0">
             <Label Text="Location"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
-
             <Entry x:Name="eEnterLocation" Placeholder="Enter a location" Text="{Binding EnteredLocation}" />
             <Button x:Name="btnUseLocation" Text="Use This Location" VerticalOptions="CenterAndExpand" Command="{Binding GetCurrentWeatherCommand}" />
             <Button x:Name="btnUpdateLocation" Text="Update Current Location"  Command="{Binding  GetCurrentLocationCommand}"/>
             <Editor x:Name="eCurrentLocation" Text ="{Binding CurrentPhoneLocation.Latitude}" IsEnabled="false"/>
-            <ListView x:Name="lstToday"/>
         </StackLayout>
-    </ContentPage.Content>
+
+        <Label Grid.Column="0" Grid.Row="1" Text="Forecast:"/>
+        
+        <StackLayout  Grid.Column ="0" Grid.Row="2">
+            <Label Grid.Column ="0" Text="Temperature:"/>
+        </StackLayout>
+        
+        <StackLayout  Grid.Column ="1" Grid.Row="3">
+            <Label  Text="{Binding CurrentWeather.main.temp}"/>
+        </StackLayout>
+    </Grid>
 </ContentPage>
