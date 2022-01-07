@@ -11,6 +11,7 @@ using Thunderstruck.UI.AppService;
 using Thunderstruck.UI.Helpers;
 using Thunderstruck.UI.ResponseModels.UserModels;
 using Thunderstruck.UI.Views.Project.Forecast;
+using Thunderstruck.UI.Views.Project.UserInfo;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -137,8 +138,6 @@ namespace Thunderstruck.UI.ViewModels.User
                 }
 
                 await SecureStorage.SetAsync("UserToken", authToken);
-                //Not the best way to save auth token and check if authtoken has expired instead try implementing refresh token
-                //await App.Current.MainPage.DisplayAlert("It Worked?", CurrentUser?.email + CurrentUser?.id, "Ok");
             }
             //use the spotifyuser info to add a user to the db
             using (ApiService<IUserApi> service = new ApiService<IUserApi>(GlobalVars.ThunderstruckApiOnline))
@@ -146,15 +145,15 @@ namespace Thunderstruck.UI.ViewModels.User
                 var response = await service.myService.GetByEmail(CurrentUser?.email);
                 var emailInDbUser = JsonConvert.DeserializeObject<ApiSingleResponse<DOMAIN.Models.User>>(response)?.Value;
 
-                //do not create db user of there're already one with the same email
+                //do not create db user if there're already one with the same email
                 if (CurrentUser?.email != emailInDbUser?.Email)
                 {
                     var dbUser = await UserHelper.MapSpotifyUserToDbUser(CurrentUser);
                     await service.myService.Create(dbUser);
                 }
 
-                //create new stack
-                await _pageService.PushAsync(new WeatherTabbedPage());
+                //Navigate to Tabbed user page
+                await _pageService.PushAsync(new UserTabbedPage());
             }
         }
 

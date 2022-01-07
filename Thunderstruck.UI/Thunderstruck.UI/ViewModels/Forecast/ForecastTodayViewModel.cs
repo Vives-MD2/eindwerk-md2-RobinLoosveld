@@ -33,26 +33,23 @@ namespace Thunderstruck.UI.ViewModels.Forecast
         public string EnteredLocation
         {
             get => _enteredLocation;
-            set
-            {
-                if (value == _enteredLocation) return;
-                _enteredLocation = value;
-                OnPropertyChanged();
-            }
+            set =>  SetValue(ref _enteredLocation, value);
         }
 
         private Location _currentPhoneLocation;
         public Location CurrentPhoneLocation
         {
             get => _currentPhoneLocation;
-            set
-            {
-                if (value == _currentPhoneLocation) return;
-                _currentPhoneLocation = value;
-                OnPropertyChanged();
-            }
+            set => SetValue(ref _currentPhoneLocation, value);
         }
 
+        private LocationDataWithDouble _phoneLocationMappedObject;
+
+        public LocationDataWithDouble PhoneLocationMappedObject
+        {
+            get => _phoneLocationMappedObject;
+            set => SetValue(ref _phoneLocationMappedObject, value);
+        }
         private CurrentWeatherModelRoot _currentWeather;
 
         public CurrentWeatherModelRoot CurrentWeather
@@ -105,7 +102,7 @@ namespace Thunderstruck.UI.ViewModels.Forecast
                         response.EnsureSuccessStatusCode();
                         var stream = await response.Content.ReadAsStreamAsync();
                         CurrentWeather = await JsonSerializer.DeserializeAsync<CurrentWeatherModelRoot>(stream);
-                        await Application.Current.MainPage.DisplayAlert("Alert", CurrentWeather.name + CurrentWeather.coord.lat, "Ok");
+                        //await Application.Current.MainPage.DisplayAlert("Alert", CurrentWeather.name + CurrentWeather.coord.lat, "Ok");
                     }
                     catch (JsonParsingException ex)
                     {
@@ -125,17 +122,17 @@ namespace Thunderstruck.UI.ViewModels.Forecast
 
                 var locationData = new LocationData
                     { Location = LocationDataHelper.ConvertLocationToPoint(CurrentPhoneLocation), TimeStamp = DateTime.Now };
-                //get placename etc to use in the db
-
+                
+                //Get the placemark by the phone gps coordinates -> reverse geocoding
                 var placemark = await LocationDataHelper.GetPlacemarkByCoordinates(CurrentPhoneLocation.Latitude, CurrentPhoneLocation.Longitude);
-                LocationDataWithDouble locationMapObject = new LocationDataWithDouble
+                PhoneLocationMappedObject= new LocationDataWithDouble
                 {
                     LocationName = placemark.Locality,
                     TimeStamp = locationData.TimeStamp,
                     XLongitude = locationData.Location.X,
                     YLatitude = locationData.Location.Y
                 };
-                var response = await service.myService.Create(locationMapObject);
+                var response = await service.myService.Create(PhoneLocationMappedObject);
                 var test = await service.myService.GetById(8);
             }
         }
