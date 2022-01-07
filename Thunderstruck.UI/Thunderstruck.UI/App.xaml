@@ -3,6 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Thunderstruck.UI.App">
     <Application.Resources>
-        
+        <ResourceDictionary>
+            <!--Themes-->
+            <!--Spotify Green: https://developer.spotify.com/documentation/general/design-and-branding/#using-our-colors-->
+                <Color x:Key="primary-theme">#1DB954</Color>
+            <Color x:Key="secondary-theme">#000000</Color>
+            <Color x:Key="primary-text">#FFFFFF</Color>
+
+
+            <!--Styles-->
+            <Style ApplyToDerivedTypes="True" TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor" Value="{StaticResource Key=secondary-theme}" />
+            </Style>
+            <Style ApplyToDerivedTypes="True" TargetType="TabbedPage">
+                <Setter Property="BarBackgroundColor" Value="{StaticResource Key=primary-theme}" />
+            </Style>
+
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

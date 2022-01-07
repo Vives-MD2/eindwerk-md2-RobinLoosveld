@@ -152,9 +152,8 @@ namespace Thunderstruck.UI.ViewModels.User
                 }
                 //Navigate to Tabbed user page
                await App.Current.MainPage.DisplayAlert("Logged in", $"Welcome,{emailInDbUser?.Username}!", "Onward to glory");
-                await _pageService.PushAsync(new UserTabbedPage());
+               await _pageService.PushAsync(new UserTabbedPage());
             }
         }
-
     }
 }

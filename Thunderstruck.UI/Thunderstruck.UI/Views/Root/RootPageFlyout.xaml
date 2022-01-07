@@ -3,14 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Thunderstruck.UI.Views.Root.RootPageFlyout"
              NavigationPage.HasNavigationBar="False"
-             Title="Flyout">
+             Title="Thunderstruck">
   <StackLayout>
     <ListView x:Name="MenuItemsListView"
               SeparatorVisibility="None"
               HasUnevenRows="true"
               ItemsSource="{Binding MenuItems}">
       <ListView.Header>
-        <Grid BackgroundColor="#03A9F4">
+        <Grid BackgroundColor="{StaticResource Key=primary-theme}">
           <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10"/>
             <ColumnDefinition Width="*"/>
@@ -26,7 +26,8 @@
               Grid.Column="1"
               Grid.Row="2"
               Text="Thunderstruck"
-              Style="{DynamicResource SubtitleStyle}"/>
+              TextColor="{StaticResource Key=primary-text}"
+              />
         </Grid>
       </ListView.Header>
       <ListView.ItemTemplate>
